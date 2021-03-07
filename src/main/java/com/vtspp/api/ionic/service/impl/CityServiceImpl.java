@@ -1,70 +1,70 @@
 package com.vtspp.api.ionic.service.impl;
 
-import com.vtspp.api.ionic.domain.Category;
-import com.vtspp.api.ionic.repositories.CategoryRepository;
-import com.vtspp.api.ionic.service.CategoryService;
-import com.vtspp.api.ionic.service.exceptions.category.*;
-import com.vtspp.api.ionic.util.messages.exceptions.category.UtilMessageCategory;
+import com.vtspp.api.ionic.domain.City;
+import com.vtspp.api.ionic.repositories.CityRepository;
+import com.vtspp.api.ionic.service.CityService;
+import com.vtspp.api.ionic.service.exceptions.city.*;
+import com.vtspp.api.ionic.util.messages.exceptions.city.UtilMessageCity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class CityServiceImpl implements CategoryService {
+public class CityServiceImpl implements CityService {
 
-    private CategoryRepository categoryRepository;
+    private CityRepository cityRepository;
 
     @Autowired
-    public CityServiceImpl(CategoryRepository categoryRepository) {
-        this.categoryRepository = categoryRepository;
+    public CityServiceImpl(CityRepository cityRepository) {
+        this.cityRepository = cityRepository;
     }
 
     @Override
-    public Category save(Category obj) throws CategoryNotSaveException {
+    public City save(City obj) throws CityNotSaveException {
         try {
-            return categoryRepository.save(obj);
+            return cityRepository.save(obj);
         }
-        catch (CategoryNotSaveException e) {
-            throw new CategoryNotSaveException(UtilMessageCategory.getMessageErrorSaveCategory());
-        }
-    }
-
-    @Override
-    public void remove(Integer id) throws CategoryRemoveException {
-        try {
-            categoryRepository.deleteById(id);
-        }
-        catch (CategoryRemoveException e) {
-            throw new CategoryRemoveException(UtilMessageCategory.getMessageErrorRemoveCategory());
+        catch (CityNotSaveException e) {
+            throw new CityNotSaveException(UtilMessageCity.getMessageErrorSaveCity());
         }
     }
 
     @Override
-    public List<Category> findAll() throws CategoryFindAllException {
+    public void remove(Integer id) throws CityRemoveException {
         try {
-            return categoryRepository.findAll();
+            cityRepository.deleteById(id);
         }
-        catch (CategoryFindAllException e) {
-            throw new CategoryFindAllException(UtilMessageCategory.getMessageErrorFindAllCategory());
+        catch (CityRemoveException e) {
+            throw new CityRemoveException(UtilMessageCity.getMessageErrorRemoveCity());
         }
     }
 
     @Override
-    public void update(Category obj) throws CategoryUpdateException, CategoryNotFoundException {
-        Category category;
+    public List<City> findAll() throws CityFindAllException {
         try {
-            category = categoryRepository.getOne(obj.getId());
-            category.setName(obj.getName());
+            return cityRepository.findAll();
         }
-        catch (CategoryNotFoundException e) {
-            throw new CategoryNotFoundException(UtilMessageCategory.getMessageErrorFindOneCategory());
+        catch (CityFindAllException e) {
+            throw new CityFindAllException(UtilMessageCity.getMessageErrorFindAllCity());
+        }
+    }
+
+    @Override
+    public void update(City obj) throws CityUpdateException, CityNotFoundException {
+        City city;
+        try {
+            city = cityRepository.getOne(obj.getId());
+            city.setName(obj.getName());
+        }
+        catch (CityNotFoundException e) {
+            throw new CityNotFoundException(UtilMessageCity.getMessageErrorFindOneCity());
         }
         try {
-            categoryRepository.save(category);
+            cityRepository.save(city);
         }
-        catch (CategoryUpdateException e) {
-            throw new CategoryUpdateException(UtilMessageCategory.getMessageErrorUpdateCategory());
+        catch (CityUpdateException e) {
+            throw new CityUpdateException(UtilMessageCity.getMessageErrorUpdateCity());
         }
 
     }
