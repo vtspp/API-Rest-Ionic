@@ -56,6 +56,8 @@ public class ClientServiceImpl implements ClientService {
         try {
             client = clientRepository.getOne(obj.getId());
             client.setName(obj.getName());
+            client.setEmail(obj.getEmail());
+            client.setCfpOuCnpj(obj.getCfpOuCnpj());
         }
         catch (ClientNotFoundException e) {
             throw new ClientNotFoundException(UtilMessageClient.getMessageErrorFindOneClient());
