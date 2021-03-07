@@ -1,6 +1,6 @@
 package com.vtspp.api.ionic.service;
 
-import com.vtspp.api.ionic.domain.Category;
+import com.vtspp.api.ionic.domain.State;
 
-public interface StateService extends Services<Category> {
+public interface StateService extends Services<State> {
 }

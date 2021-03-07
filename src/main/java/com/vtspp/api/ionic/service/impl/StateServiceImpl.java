@@ -1,70 +1,70 @@
 package com.vtspp.api.ionic.service.impl;
 
-import com.vtspp.api.ionic.domain.Category;
-import com.vtspp.api.ionic.repositories.CategoryRepository;
-import com.vtspp.api.ionic.service.CategoryService;
-import com.vtspp.api.ionic.service.exceptions.category.*;
-import com.vtspp.api.ionic.util.messages.exceptions.category.UtilMessageCategory;
+import com.vtspp.api.ionic.domain.State;
+import com.vtspp.api.ionic.repositories.StateRepository;
+import com.vtspp.api.ionic.service.StateService;
+import com.vtspp.api.ionic.service.exceptions.state.*;
+import com.vtspp.api.ionic.util.messages.exceptions.state.UtilMessageState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class StateServiceImpl implements CategoryService {
+public class StateServiceImpl implements StateService {
 
-    private CategoryRepository categoryRepository;
+    private StateRepository stateRepository;
 
     @Autowired
-    public StateServiceImpl(CategoryRepository categoryRepository) {
-        this.categoryRepository = categoryRepository;
+    public StateServiceImpl(StateRepository stateRepository) {
+        this.stateRepository = stateRepository;
     }
 
     @Override
-    public Category save(Category obj) throws CategoryNotSaveException {
+    public State save(State obj) throws StateNotSaveException {
         try {
-            return categoryRepository.save(obj);
+            return stateRepository.save(obj);
         }
-        catch (CategoryNotSaveException e) {
-            throw new CategoryNotSaveException(UtilMessageCategory.getMessageErrorSaveCategory());
-        }
-    }
-
-    @Override
-    public void remove(Integer id) throws CategoryRemoveException {
-        try {
-            categoryRepository.deleteById(id);
-        }
-        catch (CategoryRemoveException e) {
-            throw new CategoryRemoveException(UtilMessageCategory.getMessageErrorRemoveCategory());
+        catch (StateNotSaveException e) {
+            throw new StateNotSaveException(UtilMessageState.getMessageErrorSaveState());
         }
     }
 
     @Override
-    public List<Category> findAll() throws CategoryFindAllException {
+    public void remove(Integer id) throws StateRemoveException {
         try {
-            return categoryRepository.findAll();
+            stateRepository.deleteById(id);
         }
-        catch (CategoryFindAllException e) {
-            throw new CategoryFindAllException(UtilMessageCategory.getMessageErrorFindAllCategory());
+        catch (StateRemoveException e) {
+            throw new StateRemoveException(UtilMessageState.getMessageErrorRemoveState());
         }
     }
 
     @Override
-    public void update(Category obj) throws CategoryUpdateException, CategoryNotFoundException {
-        Category category;
+    public List<State> findAll() throws StateFindAllException {
         try {
-            category = categoryRepository.getOne(obj.getId());
-            category.setName(obj.getName());
+            return stateRepository.findAll();
         }
-        catch (CategoryNotFoundException e) {
-            throw new CategoryNotFoundException(UtilMessageCategory.getMessageErrorFindOneCategory());
+        catch (StateFindAllException e) {
+            throw new StateFindAllException(UtilMessageState.getMessageErrorFindAllState());
+        }
+    }
+
+    @Override
+    public void update(State obj) throws StateUpdateException, StateNotFoundException {
+        State state;
+        try {
+            state = stateRepository.getOne(obj.getId());
+            state.setName(obj.getName());
+        }
+        catch (StateNotFoundException e) {
+            throw new StateNotFoundException(UtilMessageState.getMessageErrorFindOneState());
         }
         try {
-            categoryRepository.save(category);
+            stateRepository.save(state);
         }
-        catch (CategoryUpdateException e) {
-            throw new CategoryUpdateException(UtilMessageCategory.getMessageErrorUpdateCategory());
+        catch (StateUpdateException e) {
+            throw new StateUpdateException(UtilMessageState.getMessageErrorUpdateState());
         }
 
     }
