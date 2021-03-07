@@ -1,70 +1,73 @@
 package com.vtspp.api.ionic.service.impl;
 
-import com.vtspp.api.ionic.domain.Category;
-import com.vtspp.api.ionic.repositories.CategoryRepository;
-import com.vtspp.api.ionic.service.CategoryService;
-import com.vtspp.api.ionic.service.exceptions.category.*;
-import com.vtspp.api.ionic.util.messages.exceptions.category.UtilMessageCategory;
+import com.vtspp.api.ionic.domain.Order;
+import com.vtspp.api.ionic.repositories.OrderRepository;
+import com.vtspp.api.ionic.service.OrderService;
+import com.vtspp.api.ionic.service.exceptions.order.*;
+import com.vtspp.api.ionic.util.messages.exceptions.order.UtilMessageOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class OrderServiceImpl implements CategoryService {
+public class OrderServiceImpl implements OrderService {
 
-    private CategoryRepository categoryRepository;
+    private OrderRepository orderRepository;
 
     @Autowired
-    public OrderServiceImpl(CategoryRepository categoryRepository) {
-        this.categoryRepository = categoryRepository;
+    public OrderServiceImpl(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
     }
 
     @Override
-    public Category save(Category obj) throws CategoryNotSaveException {
+    public Order save(Order obj) throws OrderNotSaveException {
         try {
-            return categoryRepository.save(obj);
+            return orderRepository.save(obj);
         }
-        catch (CategoryNotSaveException e) {
-            throw new CategoryNotSaveException(UtilMessageCategory.getMessageErrorSaveCategory());
-        }
-    }
-
-    @Override
-    public void remove(Integer id) throws CategoryRemoveException {
-        try {
-            categoryRepository.deleteById(id);
-        }
-        catch (CategoryRemoveException e) {
-            throw new CategoryRemoveException(UtilMessageCategory.getMessageErrorRemoveCategory());
+        catch (OrderNotSaveException e) {
+            throw new OrderNotSaveException(UtilMessageOrder.getMessageErrorSaveOrder());
         }
     }
 
     @Override
-    public List<Category> findAll() throws CategoryFindAllException {
+    public void remove(Integer id) throws OrderRemoveException {
         try {
-            return categoryRepository.findAll();
+            orderRepository.deleteById(id);
         }
-        catch (CategoryFindAllException e) {
-            throw new CategoryFindAllException(UtilMessageCategory.getMessageErrorFindAllCategory());
+        catch (OrderRemoveException e) {
+            throw new OrderRemoveException(UtilMessageOrder.getMessageErrorRemoveOrder());
         }
     }
 
     @Override
-    public void update(Category obj) throws CategoryUpdateException, CategoryNotFoundException {
-        Category category;
+    public List<Order> findAll() throws OrderFindAllException {
         try {
-            category = categoryRepository.getOne(obj.getId());
-            category.setName(obj.getName());
+            return orderRepository.findAll();
         }
-        catch (CategoryNotFoundException e) {
-            throw new CategoryNotFoundException(UtilMessageCategory.getMessageErrorFindOneCategory());
+        catch (OrderFindAllException e) {
+            throw new OrderFindAllException(UtilMessageOrder.getMessageErrorFindAllOrder());
+        }
+    }
+
+    @Override
+    public void update(Order obj) throws OrderUpdateException, OrderNotFoundException {
+        Order order;
+        try {
+            order = orderRepository.getOne(obj.getId());
+            order.setInstant(obj.getInstant());
+            order.setClient(obj.getClient());
+            order.setPayment(obj.getPayment());
+            order.setDeliveryAddress(obj.getDeliveryAddress());
+        }
+        catch (OrderNotFoundException e) {
+            throw new OrderNotFoundException(UtilMessageOrder.getMessageErrorFindOneOrder());
         }
         try {
-            categoryRepository.save(category);
+            orderRepository.save(order);
         }
-        catch (CategoryUpdateException e) {
-            throw new CategoryUpdateException(UtilMessageCategory.getMessageErrorUpdateCategory());
+        catch (OrderUpdateException e) {
+            throw new OrderUpdateException(UtilMessageOrder.getMessageErrorUpdateOrder());
         }
 
     }
