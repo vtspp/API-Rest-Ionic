@@ -1,7 +1,7 @@
-package com.vtspp.api.ionic.resource.handler;
+package com.vtspp.api.ionic.resource.exception.handler;
 
+import com.vtspp.api.ionic.resource.exception.StructureMessageHandler;
 import com.vtspp.api.ionic.service.exceptions.category.*;
-import com.vtspp.api.ionic.util.UtilMessageHandler;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -15,8 +15,8 @@ import java.time.LocalDateTime;
 public class CategoryResourceHandlerException implements Serializable {
 
     @ExceptionHandler(CategoryNotFoundException.class)
-    protected ResponseEntity<UtilMessageHandler> productNotFoundExceptionHandler (CategoryNotFoundException e, HttpServletRequest request) {
-        UtilMessageHandler messageHandler =  new UtilMessageHandler(HttpStatus.NOT_FOUND.value(),
+    protected ResponseEntity<StructureMessageHandler> productNotFoundExceptionHandler (CategoryNotFoundException e, HttpServletRequest request) {
+        StructureMessageHandler messageHandler =  new StructureMessageHandler(HttpStatus.NOT_FOUND.value(),
                                                                                                              e.getMessage(),
                                                                                                              System.currentTimeMillis(),
                                                                                                              LocalDateTime.now());
@@ -24,8 +24,8 @@ public class CategoryResourceHandlerException implements Serializable {
     }
 
     @ExceptionHandler(CategoryNotSaveException.class)
-    protected ResponseEntity<UtilMessageHandler> productNotSaveExceptionHandler (CategoryNotSaveException e, HttpServletRequest request) {
-        UtilMessageHandler messageHandler = new UtilMessageHandler(HttpStatus.INSUFFICIENT_STORAGE.value(),
+    protected ResponseEntity<StructureMessageHandler> productNotSaveExceptionHandler (CategoryNotSaveException e, HttpServletRequest request) {
+        StructureMessageHandler messageHandler = new StructureMessageHandler(HttpStatus.INSUFFICIENT_STORAGE.value(),
                 e.getMessage(),
                 System.currentTimeMillis(),
                 LocalDateTime.now());
@@ -33,8 +33,8 @@ public class CategoryResourceHandlerException implements Serializable {
     }
 
     @ExceptionHandler(CategoryRemoveException.class)
-    protected ResponseEntity<UtilMessageHandler> productRemoveExceptionHandler (CategoryRemoveException e, HttpServletRequest request) {
-        UtilMessageHandler messageHandler = new UtilMessageHandler(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+    protected ResponseEntity<StructureMessageHandler> productRemoveExceptionHandler (CategoryRemoveException e, HttpServletRequest request) {
+        StructureMessageHandler messageHandler = new StructureMessageHandler(HttpStatus.INTERNAL_SERVER_ERROR.value(),
                 e.getMessage(),
                 System.currentTimeMillis(),
                 LocalDateTime.now());
@@ -42,8 +42,8 @@ public class CategoryResourceHandlerException implements Serializable {
     }
 
     @ExceptionHandler(CategoryUpdateException.class)
-    protected ResponseEntity<UtilMessageHandler> productUpdateExceptionHandler (CategoryUpdateException e, HttpServletRequest request) {
-        UtilMessageHandler messageHandler = new UtilMessageHandler(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+    protected ResponseEntity<StructureMessageHandler> productUpdateExceptionHandler (CategoryUpdateException e, HttpServletRequest request) {
+        StructureMessageHandler messageHandler = new StructureMessageHandler(HttpStatus.INTERNAL_SERVER_ERROR.value(),
                 e.getMessage(),
                 System.currentTimeMillis(),
                 LocalDateTime.now());
@@ -51,8 +51,8 @@ public class CategoryResourceHandlerException implements Serializable {
     }
 
     @ExceptionHandler(CategoryFindAllException.class)
-    protected ResponseEntity<UtilMessageHandler> productFindAllExceptionHandler (CategoryFindAllException e, HttpServletRequest request) {
-        UtilMessageHandler messageHandler = new UtilMessageHandler(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+    protected ResponseEntity<StructureMessageHandler> productFindAllExceptionHandler (CategoryFindAllException e, HttpServletRequest request) {
+        StructureMessageHandler messageHandler = new StructureMessageHandler(HttpStatus.INTERNAL_SERVER_ERROR.value(),
                 e.getMessage(),
                 System.currentTimeMillis(),
                 LocalDateTime.now());

@@ -1,21 +1,23 @@
-package com.vtspp.api.ionic.util;
+package com.vtspp.api.ionic.resource.exception;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class UtilMessageHandler implements Serializable {
+public class StructureMessageHandler implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Integer status;
     private String message;
     private Long timeStamp;
     private LocalDateTime instant;
+    private String path;
 
-    public UtilMessageHandler(Integer status, String message, Long timeStamp, LocalDateTime instant) {
+    public StructureMessageHandler(Integer status, String message, Long timeStamp, LocalDateTime instant, String path) {
         this.status = status;
         this.message = message;
         this.timeStamp = timeStamp;
         this.instant = instant;
+        this.path = path;
     }
 
     public Integer getStatus() {
@@ -28,6 +30,10 @@ public class UtilMessageHandler implements Serializable {
 
     public String getMessage() {
         return message;
+    }
+
+    public String getPath() {
+        return path;
     }
 
     public void setMessage(String message) {
@@ -48,5 +54,9 @@ public class UtilMessageHandler implements Serializable {
 
     public void setInstant(LocalDateTime instant) {
         this.instant = instant;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
 }
