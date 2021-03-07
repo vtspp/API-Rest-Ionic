@@ -1,70 +1,70 @@
 package com.vtspp.api.ionic.service.impl;
 
-import com.vtspp.api.ionic.domain.Category;
-import com.vtspp.api.ionic.repositories.CategoryRepository;
-import com.vtspp.api.ionic.service.CategoryService;
-import com.vtspp.api.ionic.service.exceptions.category.*;
-import com.vtspp.api.ionic.util.messages.exceptions.category.UtilMessageCategory;
+import com.vtspp.api.ionic.domain.Client;
+import com.vtspp.api.ionic.repositories.ClientRepository;
+import com.vtspp.api.ionic.service.ClientService;
+import com.vtspp.api.ionic.service.exceptions.client.*;
+import com.vtspp.api.ionic.util.messages.exceptions.client.UtilMessageClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ClientServiceImpl implements CategoryService {
+public class ClientServiceImpl implements ClientService {
 
-    private CategoryRepository categoryRepository;
+    private ClientRepository clientRepository;
 
     @Autowired
-    public ClientServiceImpl(CategoryRepository categoryRepository) {
-        this.categoryRepository = categoryRepository;
+    public ClientServiceImpl(ClientRepository clientRepository) {
+        this.clientRepository = clientRepository;
     }
 
     @Override
-    public Category save(Category obj) throws CategoryNotSaveException {
+    public Client save(Client obj) throws ClientNotSaveException {
         try {
-            return categoryRepository.save(obj);
+            return clientRepository.save(obj);
         }
-        catch (CategoryNotSaveException e) {
-            throw new CategoryNotSaveException(UtilMessageCategory.getMessageErrorSaveCategory());
-        }
-    }
-
-    @Override
-    public void remove(Integer id) throws CategoryRemoveException {
-        try {
-            categoryRepository.deleteById(id);
-        }
-        catch (CategoryRemoveException e) {
-            throw new CategoryRemoveException(UtilMessageCategory.getMessageErrorRemoveCategory());
+        catch (ClientNotSaveException e) {
+            throw new ClientNotSaveException(UtilMessageClient.getMessageErrorSaveClient());
         }
     }
 
     @Override
-    public List<Category> findAll() throws CategoryFindAllException {
+    public void remove(Integer id) throws ClientRemoveException {
         try {
-            return categoryRepository.findAll();
+            clientRepository.deleteById(id);
         }
-        catch (CategoryFindAllException e) {
-            throw new CategoryFindAllException(UtilMessageCategory.getMessageErrorFindAllCategory());
+        catch (ClientRemoveException e) {
+            throw new ClientRemoveException(UtilMessageClient.getMessageErrorRemoveClient());
         }
     }
 
     @Override
-    public void update(Category obj) throws CategoryUpdateException, CategoryNotFoundException {
-        Category category;
+    public List<Client> findAll() throws ClientFindAllException {
         try {
-            category = categoryRepository.getOne(obj.getId());
-            category.setName(obj.getName());
+            return clientRepository.findAll();
         }
-        catch (CategoryNotFoundException e) {
-            throw new CategoryNotFoundException(UtilMessageCategory.getMessageErrorFindOneCategory());
+        catch (ClientFindAllException e) {
+            throw new ClientFindAllException(UtilMessageClient.getMessageErrorFindAllClient());
+        }
+    }
+
+    @Override
+    public void update(Client obj) throws ClientUpdateException, ClientNotFoundException {
+        Client client;
+        try {
+            client = clientRepository.getOne(obj.getId());
+            client.setName(obj.getName());
+        }
+        catch (ClientNotFoundException e) {
+            throw new ClientNotFoundException(UtilMessageClient.getMessageErrorFindOneClient());
         }
         try {
-            categoryRepository.save(category);
+            clientRepository.save(client);
         }
-        catch (CategoryUpdateException e) {
-            throw new CategoryUpdateException(UtilMessageCategory.getMessageErrorUpdateCategory());
+        catch (ClientUpdateException e) {
+            throw new ClientUpdateException(UtilMessageClient.getMessageErrorUpdateClient());
         }
 
     }
