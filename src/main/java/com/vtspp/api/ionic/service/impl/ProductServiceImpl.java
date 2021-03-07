@@ -57,6 +57,7 @@ public class ProductServiceImpl implements ProductService {
         try {
             product = productRepository.getOne(obj.getId());
             product.setName(obj.getName());
+            product.setPrice(obj.getPrice());
         }
         catch (ProductNotFoundException e) {
             throw new ProductNotFoundException(UtilMessageProduct.getMessageErrorFindOneProduct());
