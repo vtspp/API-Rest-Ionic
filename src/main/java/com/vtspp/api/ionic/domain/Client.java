@@ -1,5 +1,6 @@
 package com.vtspp.api.ionic.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.vtspp.api.ionic.enums.TypeClient;
 
 import javax.persistence.*;
@@ -20,13 +21,15 @@ public class Client implements Serializable {
     @Enumerated(EnumType.ORDINAL)
     private Integer typeClient;
 
-    @OneToMany
+    @OneToMany(mappedBy = "client")
+    @JsonManagedReference
     private List<Andress> andresses = new ArrayList<>();
 
     @OneToMany
     private List<Order> orders = new ArrayList<>();
 
-    @OneToMany
+    @ElementCollection
+    @CollectionTable(name = "telephone")
     private Set<Telephone> telephones = new HashSet<>();
 
     public Client (){

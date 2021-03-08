@@ -1,5 +1,7 @@
 package com.vtspp.api.ionic.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -17,10 +19,13 @@ public class Andress implements Serializable {
     private String district;
     private String zipCode;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    @JsonBackReference
     private Client client;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "city_id")
     private City city;
 
     public Andress (){
