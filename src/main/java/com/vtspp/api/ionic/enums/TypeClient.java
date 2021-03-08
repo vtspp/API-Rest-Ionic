@@ -10,9 +10,6 @@ public enum  TypeClient {
     private Integer code;
     private String description;
 
-    TypeClient() {
-    }
-
     TypeClient(Integer code, String description) {
         this.code = code;
         this.description = description;
@@ -26,15 +23,4 @@ public enum  TypeClient {
         return description;
     }
 
-    public static TypeClient toEnum (Integer code) {
-
-        if (isNull(code)) {
-            return null;
-        }
-
-        for (TypeClient type : TypeClient.values()) {
-            if (code.equals(type.getCode())) return type;
-        }
-        throw new IllegalArgumentException("Id inválido " + code);
-    }
 }

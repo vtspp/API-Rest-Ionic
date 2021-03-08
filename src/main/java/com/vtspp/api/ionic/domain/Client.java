@@ -2,6 +2,7 @@ package com.vtspp.api.ionic.domain;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.vtspp.api.ionic.enums.TypeClient;
+import com.vtspp.api.ionic.util.Converter;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -76,7 +77,7 @@ public class Client implements Serializable {
     }
 
     public TypeClient getTypeClient() {
-        return TypeClient.toEnum(typeClient);
+        return Converter.toEnum(TypeClient.class.getEnumConstants(), typeClient);
     }
 
     public void setTypeClient(TypeClient typeClient) {
