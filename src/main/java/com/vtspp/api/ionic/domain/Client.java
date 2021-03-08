@@ -4,9 +4,7 @@ import com.vtspp.api.ionic.enums.TypeClient;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 public class Client implements Serializable {
@@ -20,7 +18,7 @@ public class Client implements Serializable {
     private String CfpOuCnpj;
 
     @Enumerated(EnumType.ORDINAL)
-    private TypeClient typeClient;
+    private Integer typeClient;
 
     @OneToMany
     private List<Andress> andresses = new ArrayList<>();
@@ -29,7 +27,7 @@ public class Client implements Serializable {
     private List<Order> orders = new ArrayList<>();
 
     @OneToMany
-    private List<Telephone> telephones = new ArrayList<>();
+    private Set<Telephone> telephones = new HashSet<>();
 
     public Client (){
     }
@@ -39,7 +37,7 @@ public class Client implements Serializable {
         this.name = name;
         this.email = email;
         CfpOuCnpj = cfpOuCnpj;
-        this.typeClient = typeClient;
+        this.typeClient = typeClient.getCode();
     }
 
     public Integer getId() {
@@ -75,11 +73,11 @@ public class Client implements Serializable {
     }
 
     public TypeClient getTypeClient() {
-        return typeClient;
+        return TypeClient.toEnum(typeClient);
     }
 
     public void setTypeClient(TypeClient typeClient) {
-        this.typeClient = typeClient;
+        this.typeClient = typeClient.getCode();
     }
 
     public List<Andress> getAndresses() {
@@ -90,7 +88,7 @@ public class Client implements Serializable {
         return orders;
     }
 
-    public List<Telephone> getTelephones() {
+    public Set<Telephone> getTelephones() {
         return telephones;
     }
 
