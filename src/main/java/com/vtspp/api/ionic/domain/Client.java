@@ -26,7 +26,7 @@ public class Client implements Serializable {
     @JsonManagedReference
     private List<Andress> andresses = new ArrayList<>();
 
-    @OneToMany
+    @OneToMany(mappedBy = "client")
     private List<Order> orders = new ArrayList<>();
 
     @ElementCollection

@@ -7,22 +7,28 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Payment implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Enumerated(EnumType.ORDINAL)
     private StatusPayment status;
 
+    @OneToOne
+    @JoinColumn(name = "order_id")
+    @MapsId
+    private Order order;
+
     public  Payment (){
     }
 
-    public Payment(Integer id, StatusPayment status) {
+    public Payment(Integer id, StatusPayment status, Order order) {
         this.id = id;
         this.status = status;
+        this.order = order;
     }
 
     public Integer getId() {
@@ -39,6 +45,14 @@ public class Payment implements Serializable {
 
     public void setStatus(StatusPayment status) {
         this.status = status;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
     @Override

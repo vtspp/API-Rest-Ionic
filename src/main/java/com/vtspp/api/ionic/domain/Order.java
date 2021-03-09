@@ -23,10 +23,11 @@ public class Order implements Serializable {
     @OneToOne
     private Client client;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "order")
     private  Payment payment;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "delivery_andress_id")
     private Andress deliveryAddress;
 
     public Order () {

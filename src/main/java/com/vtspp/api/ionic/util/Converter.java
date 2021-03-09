@@ -17,7 +17,7 @@ public class Converter {
     public static <T> T toEnum (T [] elements , Integer code) throws IllegalArgumentException, NullPointerException{
 
         if (isNull(elements)) {
-            throw new NullPointerException(String.format("A Classe %s Não possui nenhum elemento para ser utilizado.",
+            throw new NullPointerException(String.format("A Classe %s não possui nenhum elemento para ser utilizado.",
                                                                                      elements.getClass().getName()));
         }
 
