@@ -19,7 +19,6 @@ public class Client implements Serializable {
     private String email;
     private String CfpOuCnpj;
 
-    @Enumerated(EnumType.ORDINAL)
     private Integer typeClient;
 
     @OneToMany(mappedBy = "client")
@@ -76,6 +75,7 @@ public class Client implements Serializable {
         CfpOuCnpj = cfpOuCnpj;
     }
 
+    @Enumerated(EnumType.ORDINAL)
     public TypeClient getTypeClient() {
         return Converter.toEnum(TypeClient.class.getEnumConstants(), typeClient);
     }
