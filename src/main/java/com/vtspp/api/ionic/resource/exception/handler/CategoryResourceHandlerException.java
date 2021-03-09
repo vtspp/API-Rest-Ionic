@@ -19,7 +19,8 @@ public class CategoryResourceHandlerException implements Serializable {
         StructureMessageHandler messageHandler =  new StructureMessageHandler(HttpStatus.NOT_FOUND.value(),
                                                                                                              e.getMessage(),
                                                                                                              System.currentTimeMillis(),
-                                                                                                             LocalDateTime.now());
+                                                                                                             LocalDateTime.now(),
+                                                                                                             request.getRequestURI());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(messageHandler);
     }
 
@@ -28,7 +29,8 @@ public class CategoryResourceHandlerException implements Serializable {
         StructureMessageHandler messageHandler = new StructureMessageHandler(HttpStatus.INSUFFICIENT_STORAGE.value(),
                 e.getMessage(),
                 System.currentTimeMillis(),
-                LocalDateTime.now());
+                LocalDateTime.now(),
+                request.getRequestURI());
         return ResponseEntity.status(HttpStatus.INSUFFICIENT_STORAGE).body(messageHandler);
     }
 
@@ -37,7 +39,8 @@ public class CategoryResourceHandlerException implements Serializable {
         StructureMessageHandler messageHandler = new StructureMessageHandler(HttpStatus.INTERNAL_SERVER_ERROR.value(),
                 e.getMessage(),
                 System.currentTimeMillis(),
-                LocalDateTime.now());
+                LocalDateTime.now(),
+                request.getRequestURI());
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(messageHandler);
     }
 
@@ -46,7 +49,8 @@ public class CategoryResourceHandlerException implements Serializable {
         StructureMessageHandler messageHandler = new StructureMessageHandler(HttpStatus.INTERNAL_SERVER_ERROR.value(),
                 e.getMessage(),
                 System.currentTimeMillis(),
-                LocalDateTime.now());
+                LocalDateTime.now(),
+                request.getRequestURI());
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(messageHandler);
     }
 
@@ -55,7 +59,8 @@ public class CategoryResourceHandlerException implements Serializable {
         StructureMessageHandler messageHandler = new StructureMessageHandler(HttpStatus.INTERNAL_SERVER_ERROR.value(),
                 e.getMessage(),
                 System.currentTimeMillis(),
-                LocalDateTime.now());
+                LocalDateTime.now(),
+                request.getRequestURI());
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(messageHandler);
     }
 }
