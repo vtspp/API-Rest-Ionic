@@ -9,6 +9,9 @@ public class PaymentCard extends Payment{
 
     private Integer numberOfInstallments;
 
+    public PaymentCard() {
+    }
+
     public PaymentCard(Integer id, StatusPayment status, Order order, Integer numberOfInstallments) {
         super(id, status, order);
         this.numberOfInstallments = numberOfInstallments;
