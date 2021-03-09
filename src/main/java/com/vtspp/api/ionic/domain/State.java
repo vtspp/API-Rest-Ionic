@@ -17,7 +17,6 @@ public class State implements Serializable {
     private String name;
 
     @OneToMany(mappedBy = "state")
-    @JsonBackReference
     List<City> cities = new ArrayList<>();
 
     public State (){

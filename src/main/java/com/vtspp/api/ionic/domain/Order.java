@@ -1,5 +1,7 @@
 package com.vtspp.api.ionic.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -17,10 +19,11 @@ public class Order implements Serializable {
 
     private LocalDateTime instant;
 
-    @ManyToMany
+    @OneToMany(mappedBy = "orders")
      private List<Product> itens = new ArrayList<>();
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "client_id")
     private Client client;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "order")

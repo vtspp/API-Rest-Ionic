@@ -9,17 +9,21 @@ public class Telephone implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @JoinColumn(name = "client_id")
-    @MapsId
     private Integer id;
     private String number;
+
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    @MapsId
+    private Client client;
 
     public Telephone () {
     }
 
-    public Telephone(Integer id, String number) {
+    public Telephone(Integer id, String number, Client client) {
         this.id = id;
         this.number = number;
+        this.client = client;
     }
 
     public Integer getId() {
@@ -36,6 +40,14 @@ public class Telephone implements Serializable {
 
     public void setNumber(String number) {
         this.number = number;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     @Override

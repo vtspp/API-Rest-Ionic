@@ -21,7 +21,6 @@ public class Andress implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "client_id")
-    @JsonBackReference
     private Client client;
 
     @ManyToOne

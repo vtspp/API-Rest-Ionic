@@ -1,8 +1,8 @@
 package com.vtspp.api.ionic.resource.impl;
 
-import com.vtspp.api.ionic.domain.Category;
-import com.vtspp.api.ionic.resource.CategoryResources;
-import com.vtspp.api.ionic.service.impl.CategoryServiceImpl;
+import com.vtspp.api.ionic.domain.City;
+import com.vtspp.api.ionic.resource.CityResources;
+import com.vtspp.api.ionic.service.impl.CityServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,42 +12,42 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/categories")
-public class CityResourcesImpl implements CategoryResources {
+@RequestMapping("/city")
+public class CityResourcesImpl implements CityResources {
 
-    private CategoryServiceImpl categoryService;
+    private CityServiceImpl cityService;
 
     @Autowired
-    public CityResourcesImpl(CategoryServiceImpl categoryService) {
-        this.categoryService = categoryService;
+    public CityResourcesImpl(CityServiceImpl cityService) {
+        this.cityService = cityService;
     }
 
     @PostMapping
     @Override
-    public ResponseEntity<Void> save(@RequestBody Category obj) {
+    public ResponseEntity<Void> save(@RequestBody City obj) {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri()
                 .path("/{id}")
-                .buildAndExpand(categoryService.save(obj).getId()).toUri();
+                .buildAndExpand(cityService.save(obj).getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 
     @DeleteMapping("/{id}")
     @Override
     public ResponseEntity<Void> remove(@PathVariable Integer id) {
-        categoryService.remove(id);
+        cityService.remove(id);
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping
     @Override
-    public ResponseEntity<List<Category>> findAll() {
-        return ResponseEntity.ok(categoryService.findAll());
+    public ResponseEntity<List<City>> findAll() {
+        return ResponseEntity.ok(cityService.findAll());
     }
 
     @PutMapping
     @Override
-    public ResponseEntity<Void> update(@RequestBody Category obj) {
-        categoryService.update(obj);
+    public ResponseEntity<Void> update(@RequestBody City obj) {
+        cityService.update(obj);
         return ResponseEntity.ok().build();
     }
 }

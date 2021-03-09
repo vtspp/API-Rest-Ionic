@@ -19,10 +19,11 @@ public class Product implements Serializable {
     private Double price;
 
     @ManyToMany
-    @JsonBackReference
+    @JoinTable(name = "product_category", joinColumns =
+    @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
     private List<Category> categories  =  new ArrayList<>();
 
-    @ManyToMany
+    @OneToMany
     private List<Order> orders = new ArrayList<>();
 
     public Product () {
@@ -60,6 +61,10 @@ public class Product implements Serializable {
 
     public List<Category> getCategories() {
         return categories;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
     }
 
     @Override

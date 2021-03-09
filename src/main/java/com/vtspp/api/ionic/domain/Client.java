@@ -21,14 +21,13 @@ public class Client implements Serializable {
 
     private Integer typeClient;
 
-    @OneToMany(mappedBy = "client")
-    @JsonManagedReference
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private List<Andress> andresses = new ArrayList<>();
 
     @OneToMany(mappedBy = "client")
     private List<Order> orders = new ArrayList<>();
 
-    @OneToMany
+    @OneToMany(mappedBy = "client")
     private Set<Telephone> telephones = new HashSet<>();
 
     public Client (){

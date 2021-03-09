@@ -1,8 +1,8 @@
 package com.vtspp.api.ionic.resource.impl;
 
-import com.vtspp.api.ionic.domain.Category;
-import com.vtspp.api.ionic.resource.CategoryResources;
-import com.vtspp.api.ionic.service.impl.CategoryServiceImpl;
+import com.vtspp.api.ionic.domain.Order;
+import com.vtspp.api.ionic.resource.OrderResources;
+import com.vtspp.api.ionic.service.impl.OrderServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,42 +12,42 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/categories")
-public class OrderResourcesImpl implements CategoryResources {
+@RequestMapping("/order")
+public class OrderResourcesImpl implements OrderResources {
 
-    private CategoryServiceImpl categoryService;
+    private OrderServiceImpl orderService;
 
     @Autowired
-    public OrderResourcesImpl(CategoryServiceImpl categoryService) {
-        this.categoryService = categoryService;
+    public OrderResourcesImpl(OrderServiceImpl orderService) {
+        this.orderService = orderService;
     }
 
     @PostMapping
     @Override
-    public ResponseEntity<Void> save(@RequestBody Category obj) {
+    public ResponseEntity<Void> save(@RequestBody Order obj) {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri()
                 .path("/{id}")
-                .buildAndExpand(categoryService.save(obj).getId()).toUri();
+                .buildAndExpand(orderService.save(obj).getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 
     @DeleteMapping("/{id}")
     @Override
     public ResponseEntity<Void> remove(@PathVariable Integer id) {
-        categoryService.remove(id);
+        orderService.remove(id);
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping
     @Override
-    public ResponseEntity<List<Category>> findAll() {
-        return ResponseEntity.ok(categoryService.findAll());
+    public ResponseEntity<List<Order>> findAll() {
+        return ResponseEntity.ok(orderService.findAll());
     }
 
     @PutMapping
     @Override
-    public ResponseEntity<Void> update(@RequestBody Category obj) {
-        categoryService.update(obj);
+    public ResponseEntity<Void> update(@RequestBody Order obj) {
+        orderService.update(obj);
         return ResponseEntity.ok().build();
     }
 }
