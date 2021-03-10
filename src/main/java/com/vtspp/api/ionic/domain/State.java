@@ -1,13 +1,11 @@
 package com.vtspp.api.ionic.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+@Entity(name = "tb_state")
 public class State implements Serializable {
     private static final long serialVersionUID = 1L;
 

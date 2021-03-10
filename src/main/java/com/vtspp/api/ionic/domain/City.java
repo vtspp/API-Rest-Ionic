@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
-@Entity
+@Entity(name = "tb_city")
 public class City implements Serializable {
     private static final long serialVersionUID = 1L;
 

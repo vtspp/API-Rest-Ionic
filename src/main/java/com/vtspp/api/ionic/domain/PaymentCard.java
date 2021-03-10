@@ -4,7 +4,7 @@ import com.vtspp.api.ionic.enums.StatusPayment;
 
 import javax.persistence.Entity;
 
-@Entity
+@Entity(name = "tb_payment_card")
 public class PaymentCard extends Payment{
 
     private Integer numberOfInstallments;

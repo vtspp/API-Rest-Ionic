@@ -1,6 +1,6 @@
 package com.vtspp.api.ionic.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Entity
+@Entity(name = "tb_product")
 public class Product implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -19,12 +19,10 @@ public class Product implements Serializable {
     private Double price;
 
     @ManyToMany
-    @JoinTable(name = "product_category", joinColumns =
+    @JoinTable(name = "tb_product_category", joinColumns =
     @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
+    @JsonManagedReference
     private List<Category> categories  =  new ArrayList<>();
-
-    @OneToMany
-    private List<Order> orders = new ArrayList<>();
 
     public Product () {
     }
@@ -61,10 +59,6 @@ public class Product implements Serializable {
 
     public List<Category> getCategories() {
         return categories;
-    }
-
-    public List<Order> getOrders() {
-        return orders;
     }
 
     @Override

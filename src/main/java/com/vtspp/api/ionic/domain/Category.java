@@ -1,5 +1,6 @@
 package com.vtspp.api.ionic.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Entity
+@Entity(name = "tb_category")
 public class Category implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -18,7 +19,7 @@ public class Category implements Serializable {
     private String name;
 
     @ManyToMany(mappedBy = "categories")
-    @JsonManagedReference
+    @JsonBackReference
     private List<Product> products = new ArrayList<>();
 
     public Category () {

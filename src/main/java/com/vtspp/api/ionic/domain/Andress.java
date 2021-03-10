@@ -1,12 +1,13 @@
 package com.vtspp.api.ionic.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
-@Entity
+@Entity(name = "tb_andress")
 public class Andress implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -21,6 +22,7 @@ public class Andress implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "client_id")
+    @JsonIgnore
     private Client client;
 
     @ManyToOne

@@ -1,6 +1,6 @@
 package com.vtspp.api.ionic.domain;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vtspp.api.ionic.enums.TypeClient;
 import com.vtspp.api.ionic.util.Converter;
 
@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
 
-@Entity
+@Entity(name = "tb_client")
 public class Client implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -19,9 +19,10 @@ public class Client implements Serializable {
     private String email;
     private String CfpOuCnpj;
 
+    @JoinColumn(name = "type_client_id")
     private Integer typeClient;
 
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "client")
     private List<Andress> andresses = new ArrayList<>();
 
     @OneToMany(mappedBy = "client")

@@ -1,12 +1,14 @@
 package com.vtspp.api.ionic.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vtspp.api.ionic.enums.StatusPayment;
+import com.vtspp.api.ionic.util.Converter;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
-@Entity
+@Entity(name = "tb_payment")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Payment implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -15,11 +17,13 @@ public class Payment implements Serializable {
     private Integer id;
 
     @Enumerated(EnumType.ORDINAL)
-    private StatusPayment status;
+    @JoinColumn(name = "status_id")
+    private Integer status;
 
-    @OneToOne
+    @OneToOne(mappedBy = "payment")
     @JoinColumn(name = "order_id")
     @MapsId
+    @JsonIgnore
     private Order order;
 
     public  Payment (){
@@ -27,7 +31,7 @@ public class Payment implements Serializable {
 
     public Payment(Integer id, StatusPayment status, Order order) {
         this.id = id;
-        this.status = status;
+        this.status = status.getCode();
         this.order = order;
     }
 
@@ -40,11 +44,11 @@ public class Payment implements Serializable {
     }
 
     public StatusPayment getStatus() {
-        return status;
+        return Converter.toEnum(StatusPayment.class.getEnumConstants(), status);
     }
 
     public void setStatus(StatusPayment status) {
-        this.status = status;
+        this.status = status.getCode();
     }
 
     public Order getOrder() {

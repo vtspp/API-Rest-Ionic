@@ -1,15 +1,13 @@
 package com.vtspp.api.ionic.domain;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
-@Entity
+@Entity(name = "tb_order")
 public class Order implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -17,16 +15,15 @@ public class Order implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @JsonFormat(pattern="dd/MM/yyyy HH:mm")
     private LocalDateTime instant;
-
-    @OneToMany(mappedBy = "orders")
-     private List<Product> itens = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "order")
+    @OneToOne
+    @JoinColumn(name = "payment_id")
     private  Payment payment;
 
     @ManyToOne
@@ -58,10 +55,6 @@ public class Order implements Serializable {
 
     public void setInstant(LocalDateTime instant) {
         this.instant = instant;
-    }
-
-    public List<Product> getItens() {
-        return itens;
     }
 
     public Client getClient() {
