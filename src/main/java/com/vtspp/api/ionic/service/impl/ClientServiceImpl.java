@@ -25,7 +25,7 @@ public class ClientServiceImpl implements ClientService {
         try {
             return clientRepository.save(obj);
         }
-        catch (ClientNotSaveException e) {
+        catch (RuntimeException e) {
             throw new ClientNotSaveException(UtilMessageClient.getMessageErrorSaveClient());
         }
     }
@@ -35,7 +35,7 @@ public class ClientServiceImpl implements ClientService {
         try {
             clientRepository.deleteById(id);
         }
-        catch (ClientRemoveException e) {
+        catch (RuntimeException e) {
             throw new ClientRemoveException(UtilMessageClient.getMessageErrorRemoveClient());
         }
     }
@@ -45,7 +45,7 @@ public class ClientServiceImpl implements ClientService {
         try {
             return clientRepository.findAll();
         }
-        catch (ClientFindAllException e) {
+        catch (RuntimeException e) {
             throw new ClientFindAllException(UtilMessageClient.getMessageErrorFindAllClient());
         }
     }
@@ -59,13 +59,13 @@ public class ClientServiceImpl implements ClientService {
             client.setEmail(obj.getEmail());
             client.setCfpOuCnpj(obj.getCfpOuCnpj());
         }
-        catch (ClientNotFoundException e) {
+        catch (RuntimeException e) {
             throw new ClientNotFoundException(UtilMessageClient.getMessageErrorFindOneClient());
         }
         try {
             clientRepository.save(client);
         }
-        catch (ClientUpdateException e) {
+        catch (RuntimeException e) {
             throw new ClientUpdateException(UtilMessageClient.getMessageErrorUpdateClient());
         }
 

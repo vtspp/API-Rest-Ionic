@@ -1,5 +1,7 @@
 package com.vtspp.api.ionic.resource.exception;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -48,6 +50,7 @@ public class StructureMessageHandler implements Serializable {
         this.timeStamp = timeStamp;
     }
 
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     public LocalDateTime getInstant() {
         return instant;
     }

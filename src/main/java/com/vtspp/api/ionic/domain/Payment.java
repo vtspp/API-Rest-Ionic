@@ -16,7 +16,6 @@ public class Payment implements Serializable {
     @Id
     private Integer id;
 
-    @Enumerated(EnumType.ORDINAL)
     @JoinColumn(name = "status_id")
     private Integer status;
 
@@ -43,6 +42,7 @@ public class Payment implements Serializable {
         this.id = id;
     }
 
+    @Enumerated(EnumType.ORDINAL)
     public StatusPayment getStatus() {
         return Converter.toEnum(StatusPayment.class.getEnumConstants(), status);
     }

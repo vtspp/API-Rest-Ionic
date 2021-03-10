@@ -25,7 +25,7 @@ public class StateServiceImpl implements StateService {
         try {
             return stateRepository.save(obj);
         }
-        catch (StateNotSaveException e) {
+        catch (RuntimeException e) {
             throw new StateNotSaveException(UtilMessageState.getMessageErrorSaveState());
         }
     }
@@ -35,7 +35,7 @@ public class StateServiceImpl implements StateService {
         try {
             stateRepository.deleteById(id);
         }
-        catch (StateRemoveException e) {
+        catch (RuntimeException e) {
             throw new StateRemoveException(UtilMessageState.getMessageErrorRemoveState());
         }
     }
@@ -45,7 +45,7 @@ public class StateServiceImpl implements StateService {
         try {
             return stateRepository.findAll();
         }
-        catch (StateFindAllException e) {
+        catch (RuntimeException e) {
             throw new StateFindAllException(UtilMessageState.getMessageErrorFindAllState());
         }
     }
@@ -57,13 +57,13 @@ public class StateServiceImpl implements StateService {
             state = stateRepository.getOne(obj.getId());
             state.setName(obj.getName());
         }
-        catch (StateNotFoundException e) {
+        catch (RuntimeException e) {
             throw new StateNotFoundException(UtilMessageState.getMessageErrorFindOneState());
         }
         try {
             stateRepository.save(state);
         }
-        catch (StateUpdateException e) {
+        catch (RuntimeException e) {
             throw new StateUpdateException(UtilMessageState.getMessageErrorUpdateState());
         }
 

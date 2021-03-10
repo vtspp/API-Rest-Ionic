@@ -12,7 +12,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/telephone")
+@RequestMapping("/telephones")
 public class TelephoneResourcesImpl implements TelephoneResources {
 
     private TelephoneServiceImpl telephoneService;

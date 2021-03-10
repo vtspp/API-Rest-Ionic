@@ -1,7 +1,7 @@
 package com.vtspp.api.ionic.resource.exception.handler;
 
 import com.vtspp.api.ionic.resource.exception.StructureMessageHandler;
-import com.vtspp.api.ionic.service.exceptions.product.*;
+import com.vtspp.api.ionic.service.exceptions.client.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -15,8 +15,8 @@ import java.time.LocalDateTime;
 public class ClientResourceHandlerException implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @ExceptionHandler(ProductNotFoundException.class)
-    protected ResponseEntity<StructureMessageHandler> productNotFoundExceptionHandler (ProductNotFoundException e, HttpServletRequest request) {
+    @ExceptionHandler(ClientNotFoundException.class)
+    protected ResponseEntity<StructureMessageHandler> clientNotFoundExceptionHandler (ClientNotFoundException e, HttpServletRequest request) {
         StructureMessageHandler messageHandler =  new StructureMessageHandler(HttpStatus.NOT_FOUND.value(),
                                                                                                             e.getMessage(),
                                                                                                             System.currentTimeMillis(),
@@ -25,8 +25,8 @@ public class ClientResourceHandlerException implements Serializable {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(messageHandler);
     }
 
-    @ExceptionHandler(ProductNotSaveException.class)
-    protected ResponseEntity<StructureMessageHandler> productNotSaveExceptionHandler (ProductNotSaveException e, HttpServletRequest request) {
+    @ExceptionHandler(ClientNotSaveException.class)
+    protected ResponseEntity<StructureMessageHandler> clientNotSaveExceptionHandler (ClientNotSaveException e, HttpServletRequest request) {
         StructureMessageHandler messageHandler = new StructureMessageHandler(HttpStatus.INSUFFICIENT_STORAGE.value(),
                                                                                                            e.getMessage(),
                                                                                                            System.currentTimeMillis(),
@@ -35,8 +35,8 @@ public class ClientResourceHandlerException implements Serializable {
         return ResponseEntity.status(HttpStatus.INSUFFICIENT_STORAGE).body(messageHandler);
     }
 
-    @ExceptionHandler(ProductRemoveException.class)
-    protected ResponseEntity<StructureMessageHandler> productRemoveExceptionHandler (ProductRemoveException e, HttpServletRequest request) {
+    @ExceptionHandler(ClientRemoveException.class)
+    protected ResponseEntity<StructureMessageHandler> clientRemoveExceptionHandler (ClientRemoveException e, HttpServletRequest request) {
         StructureMessageHandler messageHandler = new StructureMessageHandler(HttpStatus.INTERNAL_SERVER_ERROR.value(),
                                                                                                            e.getMessage(),
                                                                                                            System.currentTimeMillis(),
@@ -45,8 +45,8 @@ public class ClientResourceHandlerException implements Serializable {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(messageHandler);
     }
 
-    @ExceptionHandler(ProductUpdateException.class)
-    protected ResponseEntity<StructureMessageHandler> productUpdateExceptionHandler (ProductUpdateException e, HttpServletRequest request) {
+    @ExceptionHandler(ClientUpdateException.class)
+    protected ResponseEntity<StructureMessageHandler> clientUpdateExceptionHandler (ClientUpdateException e, HttpServletRequest request) {
         StructureMessageHandler messageHandler = new StructureMessageHandler(HttpStatus.INTERNAL_SERVER_ERROR.value(),
                                                                                                            e.getMessage(),
                                                                                                            System.currentTimeMillis(),
@@ -55,8 +55,8 @@ public class ClientResourceHandlerException implements Serializable {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(messageHandler);
     }
 
-    @ExceptionHandler(ProductFindAllException.class)
-    protected ResponseEntity<StructureMessageHandler> productFindAllExceptionHandler (ProductFindAllException e, HttpServletRequest request) {
+    @ExceptionHandler(ClientFindAllException.class)
+    protected ResponseEntity<StructureMessageHandler> clientFindAllExceptionHandler (ClientFindAllException e, HttpServletRequest request) {
         StructureMessageHandler messageHandler = new StructureMessageHandler(HttpStatus.INTERNAL_SERVER_ERROR.value(),
                                                                                                            e.getMessage(),
                                                                                                            System.currentTimeMillis(),

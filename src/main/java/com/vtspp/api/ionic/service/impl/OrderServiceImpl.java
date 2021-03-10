@@ -25,7 +25,7 @@ public class OrderServiceImpl implements OrderService {
         try {
             return orderRepository.save(obj);
         }
-        catch (OrderNotSaveException e) {
+        catch (RuntimeException e) {
             throw new OrderNotSaveException(UtilMessageOrder.getMessageErrorSaveOrder());
         }
     }
@@ -35,7 +35,7 @@ public class OrderServiceImpl implements OrderService {
         try {
             orderRepository.deleteById(id);
         }
-        catch (OrderRemoveException e) {
+        catch (RuntimeException e) {
             throw new OrderRemoveException(UtilMessageOrder.getMessageErrorRemoveOrder());
         }
     }
@@ -45,7 +45,7 @@ public class OrderServiceImpl implements OrderService {
         try {
             return orderRepository.findAll();
         }
-        catch (OrderFindAllException e) {
+        catch (RuntimeException e) {
             throw new OrderFindAllException(UtilMessageOrder.getMessageErrorFindAllOrder());
         }
     }
@@ -60,13 +60,13 @@ public class OrderServiceImpl implements OrderService {
             order.setPayment(obj.getPayment());
             order.setDeliveryAddress(obj.getDeliveryAddress());
         }
-        catch (OrderNotFoundException e) {
+        catch (RuntimeException e) {
             throw new OrderNotFoundException(UtilMessageOrder.getMessageErrorFindOneOrder());
         }
         try {
             orderRepository.save(order);
         }
-        catch (OrderUpdateException e) {
+        catch (RuntimeException e) {
             throw new OrderUpdateException(UtilMessageOrder.getMessageErrorUpdateOrder());
         }
 

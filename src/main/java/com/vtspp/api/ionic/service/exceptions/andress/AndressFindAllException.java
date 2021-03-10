@@ -1,4 +1,4 @@
-package com.vtspp.api.ionic.service.exceptions.Andress;
+package com.vtspp.api.ionic.service.exceptions.andress;
 
 import java.io.Serializable;
 

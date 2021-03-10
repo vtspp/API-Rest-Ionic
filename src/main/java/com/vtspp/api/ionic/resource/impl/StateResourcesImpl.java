@@ -12,7 +12,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/state")
+@RequestMapping("/states")
 public class StateResourcesImpl implements StateResources {
 
     private StateServiceImpl stateService;

@@ -3,7 +3,7 @@ package com.vtspp.api.ionic.service.impl;
 import com.vtspp.api.ionic.domain.Andress;
 import com.vtspp.api.ionic.repositories.AndressRepository;
 import com.vtspp.api.ionic.service.AndressService;
-import com.vtspp.api.ionic.service.exceptions.Andress.*;
+import com.vtspp.api.ionic.service.exceptions.andress.*;
 import com.vtspp.api.ionic.util.messages.exceptions.andress.UtilMessageAndress;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +25,7 @@ public class AndressServiceImpl implements AndressService {
         try {
             return andressRepository.save(obj);
         }
-        catch (AndressNotSaveException e) {
+        catch (RuntimeException e) {
             throw new AndressNotSaveException(UtilMessageAndress.getMessageErrorSaveAndress());
         }
     }
@@ -35,7 +35,7 @@ public class AndressServiceImpl implements AndressService {
         try {
             andressRepository.deleteById(id);
         }
-        catch (AndressRemoveException e) {
+        catch (RuntimeException e) {
             throw new AndressRemoveException(UtilMessageAndress.getMessageErrorRemoveAndress());
         }
     }
@@ -45,7 +45,7 @@ public class AndressServiceImpl implements AndressService {
         try {
             return andressRepository.findAll();
         }
-        catch (AndressFindAllException e) {
+        catch (RuntimeException e) {
             throw new AndressFindAllException(UtilMessageAndress.getMessageErrorFindAllAndress());
         }
     }
@@ -63,13 +63,13 @@ public class AndressServiceImpl implements AndressService {
             andress.setClient(obj.getClient());
             andress.setCity(obj.getCity());
         }
-        catch (AndressNotFoundException e) {
+        catch (RuntimeException e) {
             throw new AndressNotFoundException(UtilMessageAndress.getMessageErrorFindOneAndress());
         }
         try {
             andressRepository.save(andress);
         }
-        catch (AndressUpdateException e) {
+        catch (RuntimeException e) {
             throw new AndressUpdateException(UtilMessageAndress.getMessageErrorUpdateAndress());
         }
 

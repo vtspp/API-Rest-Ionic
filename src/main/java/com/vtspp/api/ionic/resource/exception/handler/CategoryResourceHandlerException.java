@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 public class CategoryResourceHandlerException implements Serializable {
 
     @ExceptionHandler(CategoryNotFoundException.class)
-    protected ResponseEntity<StructureMessageHandler> productNotFoundExceptionHandler (CategoryNotFoundException e, HttpServletRequest request) {
+    protected ResponseEntity<StructureMessageHandler> categoryNotFoundExceptionHandler (CategoryNotFoundException e, HttpServletRequest request) {
         StructureMessageHandler messageHandler =  new StructureMessageHandler(HttpStatus.NOT_FOUND.value(),
                                                                                                              e.getMessage(),
                                                                                                              System.currentTimeMillis(),
@@ -25,7 +25,7 @@ public class CategoryResourceHandlerException implements Serializable {
     }
 
     @ExceptionHandler(CategoryNotSaveException.class)
-    protected ResponseEntity<StructureMessageHandler> productNotSaveExceptionHandler (CategoryNotSaveException e, HttpServletRequest request) {
+    protected ResponseEntity<StructureMessageHandler> categoryNotSaveExceptionHandler (CategoryNotSaveException e, HttpServletRequest request) {
         StructureMessageHandler messageHandler = new StructureMessageHandler(HttpStatus.INSUFFICIENT_STORAGE.value(),
                 e.getMessage(),
                 System.currentTimeMillis(),
@@ -35,7 +35,7 @@ public class CategoryResourceHandlerException implements Serializable {
     }
 
     @ExceptionHandler(CategoryRemoveException.class)
-    protected ResponseEntity<StructureMessageHandler> productRemoveExceptionHandler (CategoryRemoveException e, HttpServletRequest request) {
+    protected ResponseEntity<StructureMessageHandler> categoryRemoveExceptionHandler (CategoryRemoveException e, HttpServletRequest request) {
         StructureMessageHandler messageHandler = new StructureMessageHandler(HttpStatus.INTERNAL_SERVER_ERROR.value(),
                 e.getMessage(),
                 System.currentTimeMillis(),
@@ -45,7 +45,7 @@ public class CategoryResourceHandlerException implements Serializable {
     }
 
     @ExceptionHandler(CategoryUpdateException.class)
-    protected ResponseEntity<StructureMessageHandler> productUpdateExceptionHandler (CategoryUpdateException e, HttpServletRequest request) {
+    protected ResponseEntity<StructureMessageHandler> categoryUpdateExceptionHandler (CategoryUpdateException e, HttpServletRequest request) {
         StructureMessageHandler messageHandler = new StructureMessageHandler(HttpStatus.INTERNAL_SERVER_ERROR.value(),
                 e.getMessage(),
                 System.currentTimeMillis(),
@@ -55,7 +55,7 @@ public class CategoryResourceHandlerException implements Serializable {
     }
 
     @ExceptionHandler(CategoryFindAllException.class)
-    protected ResponseEntity<StructureMessageHandler> productFindAllExceptionHandler (CategoryFindAllException e, HttpServletRequest request) {
+    protected ResponseEntity<StructureMessageHandler> categoryFindAllExceptionHandler (CategoryFindAllException e, HttpServletRequest request) {
         StructureMessageHandler messageHandler = new StructureMessageHandler(HttpStatus.INTERNAL_SERVER_ERROR.value(),
                 e.getMessage(),
                 System.currentTimeMillis(),

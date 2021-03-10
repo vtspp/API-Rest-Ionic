@@ -26,7 +26,7 @@ public class ProductServiceImpl implements ProductService {
         try {
             return productRepository.save(obj);
         }
-        catch (ProductNotSaveException e) {
+        catch (RuntimeException e) {
             throw new ProductNotSaveException(UtilMessageProduct.getMessageErrorSaveProduct());
         }
     }
@@ -36,7 +36,7 @@ public class ProductServiceImpl implements ProductService {
         try {
             productRepository.deleteById(id);
         }
-        catch (ProductNotFoundException e) {
+        catch (RuntimeException e) {
             throw new ProductNotFoundException(UtilMessageProduct.getMessageErrorRemoveProduct());
         }
     }
@@ -46,7 +46,7 @@ public class ProductServiceImpl implements ProductService {
         try {
             return productRepository.findAll();
         }
-        catch (ProductNotFoundException e) {
+        catch (RuntimeException e) {
             throw new ProductNotFoundException(UtilMessageProduct.getMessageErrorFindAllProduct());
         }
     }
@@ -59,13 +59,13 @@ public class ProductServiceImpl implements ProductService {
             product.setName(obj.getName());
             product.setPrice(obj.getPrice());
         }
-        catch (ProductNotFoundException e) {
+        catch (RuntimeException e) {
             throw new ProductNotFoundException(UtilMessageProduct.getMessageErrorFindOneProduct());
         }
         try {
             productRepository.save(product);
         }
-        catch (ProductNotSaveException e) {
+        catch (RuntimeException e) {
             throw new ProductNotSaveException(UtilMessageProduct.getMessageErrorUpdateProduct());
         }
     }

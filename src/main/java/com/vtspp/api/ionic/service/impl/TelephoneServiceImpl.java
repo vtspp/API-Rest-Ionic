@@ -25,7 +25,7 @@ public class TelephoneServiceImpl implements TelephoneService {
         try {
             return telephoneRepository.save(obj);
         }
-        catch (TelephoneNotSaveException e) {
+        catch (RuntimeException e) {
             throw new TelephoneNotSaveException(UtilMessageTelephone.getMessageErrorSaveTelephone());
         }
     }
@@ -35,7 +35,7 @@ public class TelephoneServiceImpl implements TelephoneService {
         try {
             telephoneRepository.deleteById(id);
         }
-        catch (TelephoneRemoveException e) {
+        catch (RuntimeException e) {
             throw new TelephoneRemoveException(UtilMessageTelephone.getMessageErrorRemoveTelephone());
         }
     }
@@ -45,7 +45,7 @@ public class TelephoneServiceImpl implements TelephoneService {
         try {
             return telephoneRepository.findAll();
         }
-        catch (TelephoneFindAllException e) {
+        catch (RuntimeException e) {
             throw new TelephoneFindAllException(UtilMessageTelephone.getMessageErrorFindAllTelephone());
         }
     }
@@ -57,13 +57,13 @@ public class TelephoneServiceImpl implements TelephoneService {
             telephone = telephoneRepository.getOne(obj.getId());
             telephone.setNumber(obj.getNumber());
         }
-        catch (TelephoneNotFoundException e) {
+        catch (RuntimeException e) {
             throw new TelephoneNotFoundException(UtilMessageTelephone.getMessageErrorFindOneTelephone());
         }
         try {
             telephoneRepository.save(telephone);
         }
-        catch (TelephoneUpdateException e) {
+        catch (RuntimeException e) {
             throw new TelephoneUpdateException(UtilMessageTelephone.getMessageErrorUpdateTelephone());
         }
 

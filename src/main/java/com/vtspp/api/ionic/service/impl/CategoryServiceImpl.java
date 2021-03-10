@@ -25,7 +25,7 @@ public class CategoryServiceImpl implements CategoryService {
         try {
             return categoryRepository.save(obj);
         }
-        catch (CategoryNotSaveException e) {
+        catch (RuntimeException e) {
             throw new CategoryNotSaveException(UtilMessageCategory.getMessageErrorSaveCategory());
         }
     }
@@ -35,7 +35,7 @@ public class CategoryServiceImpl implements CategoryService {
         try {
             categoryRepository.deleteById(id);
         }
-        catch (CategoryRemoveException e) {
+        catch (RuntimeException e) {
             throw new CategoryRemoveException(UtilMessageCategory.getMessageErrorRemoveCategory());
         }
     }
@@ -45,7 +45,7 @@ public class CategoryServiceImpl implements CategoryService {
         try {
             return categoryRepository.findAll();
         }
-        catch (CategoryFindAllException e) {
+        catch (RuntimeException e) {
             throw new CategoryFindAllException(UtilMessageCategory.getMessageErrorFindAllCategory());
         }
     }
@@ -57,13 +57,13 @@ public class CategoryServiceImpl implements CategoryService {
             category = categoryRepository.getOne(obj.getId());
             category.setName(obj.getName());
         }
-        catch (CategoryNotFoundException e) {
+        catch (RuntimeException e) {
             throw new CategoryNotFoundException(UtilMessageCategory.getMessageErrorFindOneCategory());
         }
         try {
             categoryRepository.save(category);
         }
-        catch (CategoryUpdateException e) {
+        catch (RuntimeException e) {
             throw new CategoryUpdateException(UtilMessageCategory.getMessageErrorUpdateCategory());
         }
 

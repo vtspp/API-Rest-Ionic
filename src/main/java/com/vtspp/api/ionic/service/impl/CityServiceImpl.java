@@ -25,7 +25,7 @@ public class CityServiceImpl implements CityService {
         try {
             return cityRepository.save(obj);
         }
-        catch (CityNotSaveException e) {
+        catch (RuntimeException e) {
             throw new CityNotSaveException(UtilMessageCity.getMessageErrorSaveCity());
         }
     }
@@ -35,7 +35,7 @@ public class CityServiceImpl implements CityService {
         try {
             cityRepository.deleteById(id);
         }
-        catch (CityRemoveException e) {
+        catch (RuntimeException e) {
             throw new CityRemoveException(UtilMessageCity.getMessageErrorRemoveCity());
         }
     }
@@ -45,7 +45,7 @@ public class CityServiceImpl implements CityService {
         try {
             return cityRepository.findAll();
         }
-        catch (CityFindAllException e) {
+        catch (RuntimeException e) {
             throw new CityFindAllException(UtilMessageCity.getMessageErrorFindAllCity());
         }
     }
@@ -57,13 +57,13 @@ public class CityServiceImpl implements CityService {
             city = cityRepository.getOne(obj.getId());
             city.setName(obj.getName());
         }
-        catch (CityNotFoundException e) {
+        catch (RuntimeException e) {
             throw new CityNotFoundException(UtilMessageCity.getMessageErrorFindOneCity());
         }
         try {
             cityRepository.save(city);
         }
-        catch (CityUpdateException e) {
+        catch (RuntimeException e) {
             throw new CityUpdateException(UtilMessageCity.getMessageErrorUpdateCity());
         }
 

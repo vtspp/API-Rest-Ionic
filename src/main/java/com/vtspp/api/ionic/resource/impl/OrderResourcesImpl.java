@@ -12,7 +12,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/order")
+@RequestMapping("/orders")
 public class OrderResourcesImpl implements OrderResources {
 
     private OrderServiceImpl orderService;
