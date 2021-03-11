@@ -1,42 +1,47 @@
 package com.vtspp.api.ionic.util.messages.exceptions.telephone;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 
+@Component
 public class UtilMessageTelephone implements Serializable {
-    private static final long serialVersionUID = 1L;
+    private final long serialVersionUID = 1L;
 
+    @Value(value = "${message.error.findOne.telephone}")
+    private String MESSAGE_ERROR_FIND_ONE_TELEPHONE ;
 
-    private static String MESSAGE_ERROR_FIND_ONE_TELEPHONE ;
-    private static String MESSAGE_ERROR_SAVE_TELEPHONE ;
-    private static String MESSAGE_ERROR_REMOVE_TELEPHONE ;
-    private static String MESSAGE_ERROR_UPDATE_TELEPHONE ;
-    private static String MESSAGE_ERROR_FIND_ALL_TELEPHONE ;
+    @Value(value = "${message.error.save.telephone}")
+    private String MESSAGE_ERROR_SAVE_TELEPHONE ;
 
+    @Value(value = "${message.error.remove.telephone}")
+    private String MESSAGE_ERROR_REMOVE_TELEPHONE ;
 
-    @ConfigurationProperties("message.error.findOne.telephone")
-    public static String getMessageErrorFindOneTelephone() {
+    @Value(value = "${message.error.update.telephone}")
+    private String MESSAGE_ERROR_UPDATE_TELEPHONE ;
+
+    @Value(value = "${message.error.findAll.telephone}")
+    private String MESSAGE_ERROR_FIND_ALL_TELEPHONE ;
+
+    public String getMessageErrorFindOneTelephone() {
         return MESSAGE_ERROR_FIND_ONE_TELEPHONE;
     }
 
-    @ConfigurationProperties("message.error.save.telephone")
-    public static String getMessageErrorSaveTelephone() {
+    public String getMessageErrorSaveTelephone() {
         return MESSAGE_ERROR_SAVE_TELEPHONE;
     }
 
-    @ConfigurationProperties("message.error.remove.telephone")
-    public static String getMessageErrorRemoveTelephone() {
+    public String getMessageErrorRemoveTelephone() {
         return MESSAGE_ERROR_REMOVE_TELEPHONE;
     }
 
-    @ConfigurationProperties("message.error.update.telephone")
-    public static String getMessageErrorUpdateTelephone() {
+    public String getMessageErrorUpdateTelephone() {
         return MESSAGE_ERROR_UPDATE_TELEPHONE;
     }
 
-    @ConfigurationProperties("message.error.findAll.telephone")
-    public static String getMessageErrorFindAllTelephone() {
+    public String getMessageErrorFindAllTelephone() {
         return MESSAGE_ERROR_FIND_ALL_TELEPHONE;
     }
 

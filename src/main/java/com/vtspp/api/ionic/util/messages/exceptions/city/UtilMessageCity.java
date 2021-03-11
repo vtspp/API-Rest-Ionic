@@ -1,42 +1,47 @@
 package com.vtspp.api.ionic.util.messages.exceptions.city;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 
+@Component
 public class UtilMessageCity implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @Value(value = "${message.error.findOne.city}")
+    private String MESSAGE_ERROR_FIND_ONE_CITY ;
 
-    private static String MESSAGE_ERROR_FIND_ONE_CITY ;
-    private static String MESSAGE_ERROR_SAVE_CITY ;
-    private static String MESSAGE_ERROR_REMOVE_CITY ;
-    private static String MESSAGE_ERROR_UPDATE_CITY ;
-    private static String MESSAGE_ERROR_FIND_ALL_CITY ;
+    @Value(value = "${message.error.save.city}")
+    private String MESSAGE_ERROR_SAVE_CITY ;
 
+    @Value(value = "${message.error.remove.city}")
+    private String MESSAGE_ERROR_REMOVE_CITY ;
 
-    @ConfigurationProperties("message.error.findOne.city")
-    public static String getMessageErrorFindOneCity() {
+    @Value(value = "${message.error.update.city}")
+    private String MESSAGE_ERROR_UPDATE_CITY ;
+
+    @Value(value = "${message.error.findAll.city}")
+    private String MESSAGE_ERROR_FIND_ALL_CITY ;
+
+    public String getMessageErrorFindOneCity() {
         return MESSAGE_ERROR_FIND_ONE_CITY;
     }
 
-    @ConfigurationProperties("message.error.save.city")
-    public static String getMessageErrorSaveCity() {
+    public String getMessageErrorSaveCity() {
         return MESSAGE_ERROR_SAVE_CITY;
     }
 
-    @ConfigurationProperties("message.error.remove.city")
-    public static String getMessageErrorRemoveCity() {
+    public String getMessageErrorRemoveCity() {
         return MESSAGE_ERROR_REMOVE_CITY;
     }
 
-    @ConfigurationProperties("message.error.update.city")
-    public static String getMessageErrorUpdateCity() {
+    public String getMessageErrorUpdateCity() {
         return MESSAGE_ERROR_UPDATE_CITY;
     }
 
-    @ConfigurationProperties("message.error.findAll.city")
-    public static String getMessageErrorFindAllCity() {
+    public String getMessageErrorFindAllCity() {
         return MESSAGE_ERROR_FIND_ALL_CITY;
     }
 

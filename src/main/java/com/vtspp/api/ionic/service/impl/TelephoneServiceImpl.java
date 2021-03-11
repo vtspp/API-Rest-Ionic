@@ -15,9 +15,12 @@ public class TelephoneServiceImpl implements TelephoneService {
 
     private TelephoneRepository telephoneRepository;
 
+    private  UtilMessageTelephone utilMessageTelephone;
+
     @Autowired
-    public TelephoneServiceImpl(TelephoneRepository telephoneRepository) {
+    public TelephoneServiceImpl(TelephoneRepository telephoneRepository, UtilMessageTelephone utilMessageTelephone) {
         this.telephoneRepository = telephoneRepository;
+        this.utilMessageTelephone = utilMessageTelephone;
     }
 
     @Override
@@ -26,7 +29,7 @@ public class TelephoneServiceImpl implements TelephoneService {
             return telephoneRepository.save(obj);
         }
         catch (RuntimeException e) {
-            throw new TelephoneNotSaveException(UtilMessageTelephone.getMessageErrorSaveTelephone());
+            throw new TelephoneNotSaveException(utilMessageTelephone.getMessageErrorSaveTelephone());
         }
     }
 
@@ -36,7 +39,7 @@ public class TelephoneServiceImpl implements TelephoneService {
             telephoneRepository.deleteById(id);
         }
         catch (RuntimeException e) {
-            throw new TelephoneRemoveException(UtilMessageTelephone.getMessageErrorRemoveTelephone());
+            throw new TelephoneRemoveException(utilMessageTelephone.getMessageErrorRemoveTelephone());
         }
     }
 
@@ -46,7 +49,7 @@ public class TelephoneServiceImpl implements TelephoneService {
             return telephoneRepository.findAll();
         }
         catch (RuntimeException e) {
-            throw new TelephoneFindAllException(UtilMessageTelephone.getMessageErrorFindAllTelephone());
+            throw new TelephoneFindAllException(utilMessageTelephone.getMessageErrorFindAllTelephone());
         }
     }
 
@@ -58,13 +61,13 @@ public class TelephoneServiceImpl implements TelephoneService {
             telephone.setNumber(obj.getNumber());
         }
         catch (RuntimeException e) {
-            throw new TelephoneNotFoundException(UtilMessageTelephone.getMessageErrorFindOneTelephone());
+            throw new TelephoneNotFoundException(utilMessageTelephone.getMessageErrorFindOneTelephone());
         }
         try {
             telephoneRepository.save(telephone);
         }
         catch (RuntimeException e) {
-            throw new TelephoneUpdateException(UtilMessageTelephone.getMessageErrorUpdateTelephone());
+            throw new TelephoneUpdateException(utilMessageTelephone.getMessageErrorUpdateTelephone());
         }
 
     }

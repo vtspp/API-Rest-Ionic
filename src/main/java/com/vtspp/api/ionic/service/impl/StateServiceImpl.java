@@ -15,9 +15,12 @@ public class StateServiceImpl implements StateService {
 
     private StateRepository stateRepository;
 
+    private UtilMessageState utilMessageState;
+
     @Autowired
-    public StateServiceImpl(StateRepository stateRepository) {
+    public StateServiceImpl(StateRepository stateRepository, UtilMessageState utilMessageState) {
         this.stateRepository = stateRepository;
+        this.utilMessageState = utilMessageState;
     }
 
     @Override
@@ -26,7 +29,7 @@ public class StateServiceImpl implements StateService {
             return stateRepository.save(obj);
         }
         catch (RuntimeException e) {
-            throw new StateNotSaveException(UtilMessageState.getMessageErrorSaveState());
+            throw new StateNotSaveException(utilMessageState.getMessageErrorSaveState());
         }
     }
 
@@ -36,7 +39,7 @@ public class StateServiceImpl implements StateService {
             stateRepository.deleteById(id);
         }
         catch (RuntimeException e) {
-            throw new StateRemoveException(UtilMessageState.getMessageErrorRemoveState());
+            throw new StateRemoveException(utilMessageState.getMessageErrorRemoveState());
         }
     }
 
@@ -46,7 +49,7 @@ public class StateServiceImpl implements StateService {
             return stateRepository.findAll();
         }
         catch (RuntimeException e) {
-            throw new StateFindAllException(UtilMessageState.getMessageErrorFindAllState());
+            throw new StateFindAllException(utilMessageState.getMessageErrorFindAllState());
         }
     }
 
@@ -58,13 +61,13 @@ public class StateServiceImpl implements StateService {
             state.setName(obj.getName());
         }
         catch (RuntimeException e) {
-            throw new StateNotFoundException(UtilMessageState.getMessageErrorFindOneState());
+            throw new StateNotFoundException(utilMessageState.getMessageErrorFindOneState());
         }
         try {
             stateRepository.save(state);
         }
         catch (RuntimeException e) {
-            throw new StateUpdateException(UtilMessageState.getMessageErrorUpdateState());
+            throw new StateUpdateException(utilMessageState.getMessageErrorUpdateState());
         }
 
     }

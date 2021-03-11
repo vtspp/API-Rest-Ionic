@@ -15,9 +15,12 @@ public class CategoryServiceImpl implements CategoryService {
 
     private CategoryRepository categoryRepository;
 
+    private UtilMessageCategory utilMessageCategory;
+
     @Autowired
-    public CategoryServiceImpl(CategoryRepository categoryRepository) {
+    public CategoryServiceImpl(CategoryRepository categoryRepository, UtilMessageCategory utilMessageCategory) {
         this.categoryRepository = categoryRepository;
+        this.utilMessageCategory = utilMessageCategory;
     }
 
     @Override
@@ -26,7 +29,7 @@ public class CategoryServiceImpl implements CategoryService {
             return categoryRepository.save(obj);
         }
         catch (RuntimeException e) {
-            throw new CategoryNotSaveException(UtilMessageCategory.getMessageErrorSaveCategory());
+            throw new CategoryNotSaveException(utilMessageCategory.getMessageErrorSaveCategory());
         }
     }
 
@@ -36,7 +39,7 @@ public class CategoryServiceImpl implements CategoryService {
             categoryRepository.deleteById(id);
         }
         catch (RuntimeException e) {
-            throw new CategoryRemoveException(UtilMessageCategory.getMessageErrorRemoveCategory());
+            throw new CategoryRemoveException(utilMessageCategory.getMessageErrorRemoveCategory());
         }
     }
 
@@ -46,7 +49,7 @@ public class CategoryServiceImpl implements CategoryService {
             return categoryRepository.findAll();
         }
         catch (RuntimeException e) {
-            throw new CategoryFindAllException(UtilMessageCategory.getMessageErrorFindAllCategory());
+            throw new CategoryFindAllException(utilMessageCategory.getMessageErrorFindAllCategory());
         }
     }
 
@@ -58,13 +61,13 @@ public class CategoryServiceImpl implements CategoryService {
             category.setName(obj.getName());
         }
         catch (RuntimeException e) {
-            throw new CategoryNotFoundException(UtilMessageCategory.getMessageErrorFindOneCategory());
+            throw new CategoryNotFoundException(utilMessageCategory.getMessageErrorFindOneCategory());
         }
         try {
             categoryRepository.save(category);
         }
         catch (RuntimeException e) {
-            throw new CategoryUpdateException(UtilMessageCategory.getMessageErrorUpdateCategory());
+            throw new CategoryUpdateException(utilMessageCategory.getMessageErrorUpdateCategory());
         }
 
     }

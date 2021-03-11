@@ -15,9 +15,12 @@ public class AndressServiceImpl implements AndressService {
 
     private AndressRepository andressRepository;
 
+    private UtilMessageAndress utilMessageAndress;
+
     @Autowired
-    public AndressServiceImpl(AndressRepository andressRepository) {
+    public AndressServiceImpl(AndressRepository andressRepository, UtilMessageAndress utilMessageAndress) {
         this.andressRepository = andressRepository;
+        this.utilMessageAndress = utilMessageAndress;
     }
 
     @Override
@@ -26,7 +29,7 @@ public class AndressServiceImpl implements AndressService {
             return andressRepository.save(obj);
         }
         catch (RuntimeException e) {
-            throw new AndressNotSaveException(UtilMessageAndress.getMessageErrorSaveAndress());
+            throw new AndressNotSaveException(utilMessageAndress.getMessageErrorSaveAndress());
         }
     }
 
@@ -36,7 +39,7 @@ public class AndressServiceImpl implements AndressService {
             andressRepository.deleteById(id);
         }
         catch (RuntimeException e) {
-            throw new AndressRemoveException(UtilMessageAndress.getMessageErrorRemoveAndress());
+            throw new AndressRemoveException(utilMessageAndress.getMessageErrorRemoveAndress());
         }
     }
 
@@ -46,7 +49,7 @@ public class AndressServiceImpl implements AndressService {
             return andressRepository.findAll();
         }
         catch (RuntimeException e) {
-            throw new AndressFindAllException(UtilMessageAndress.getMessageErrorFindAllAndress());
+            throw new AndressFindAllException(utilMessageAndress.getMessageErrorFindAllAndress());
         }
     }
 
@@ -64,13 +67,13 @@ public class AndressServiceImpl implements AndressService {
             andress.setCity(obj.getCity());
         }
         catch (RuntimeException e) {
-            throw new AndressNotFoundException(UtilMessageAndress.getMessageErrorFindOneAndress());
+            throw new AndressNotFoundException(utilMessageAndress.getMessageErrorFindOneAndress());
         }
         try {
             andressRepository.save(andress);
         }
         catch (RuntimeException e) {
-            throw new AndressUpdateException(UtilMessageAndress.getMessageErrorUpdateAndress());
+            throw new AndressUpdateException(utilMessageAndress.getMessageErrorUpdateAndress());
         }
 
     }

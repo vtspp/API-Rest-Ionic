@@ -15,9 +15,12 @@ public class CityServiceImpl implements CityService {
 
     private CityRepository cityRepository;
 
+    private UtilMessageCity utilMessageCity;
+
     @Autowired
-    public CityServiceImpl(CityRepository cityRepository) {
+    public CityServiceImpl(CityRepository cityRepository, UtilMessageCity utilMessageCity) {
         this.cityRepository = cityRepository;
+        this.utilMessageCity = utilMessageCity;
     }
 
     @Override
@@ -26,7 +29,7 @@ public class CityServiceImpl implements CityService {
             return cityRepository.save(obj);
         }
         catch (RuntimeException e) {
-            throw new CityNotSaveException(UtilMessageCity.getMessageErrorSaveCity());
+            throw new CityNotSaveException(utilMessageCity.getMessageErrorSaveCity());
         }
     }
 
@@ -36,7 +39,7 @@ public class CityServiceImpl implements CityService {
             cityRepository.deleteById(id);
         }
         catch (RuntimeException e) {
-            throw new CityRemoveException(UtilMessageCity.getMessageErrorRemoveCity());
+            throw new CityRemoveException(utilMessageCity.getMessageErrorRemoveCity());
         }
     }
 
@@ -46,7 +49,7 @@ public class CityServiceImpl implements CityService {
             return cityRepository.findAll();
         }
         catch (RuntimeException e) {
-            throw new CityFindAllException(UtilMessageCity.getMessageErrorFindAllCity());
+            throw new CityFindAllException(utilMessageCity.getMessageErrorFindAllCity());
         }
     }
 
@@ -58,13 +61,13 @@ public class CityServiceImpl implements CityService {
             city.setName(obj.getName());
         }
         catch (RuntimeException e) {
-            throw new CityNotFoundException(UtilMessageCity.getMessageErrorFindOneCity());
+            throw new CityNotFoundException(utilMessageCity.getMessageErrorFindOneCity());
         }
         try {
             cityRepository.save(city);
         }
         catch (RuntimeException e) {
-            throw new CityUpdateException(UtilMessageCity.getMessageErrorUpdateCity());
+            throw new CityUpdateException(utilMessageCity.getMessageErrorUpdateCity());
         }
 
     }

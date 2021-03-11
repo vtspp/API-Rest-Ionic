@@ -15,9 +15,12 @@ public class ClientServiceImpl implements ClientService {
 
     private ClientRepository clientRepository;
 
+    private UtilMessageClient utilMessageClient;
+
     @Autowired
-    public ClientServiceImpl(ClientRepository clientRepository) {
+    public ClientServiceImpl(ClientRepository clientRepository, UtilMessageClient utilMessageClient) {
         this.clientRepository = clientRepository;
+        this.utilMessageClient = utilMessageClient;
     }
 
     @Override
@@ -26,7 +29,7 @@ public class ClientServiceImpl implements ClientService {
             return clientRepository.save(obj);
         }
         catch (RuntimeException e) {
-            throw new ClientNotSaveException(UtilMessageClient.getMessageErrorSaveClient());
+            throw new ClientNotSaveException(utilMessageClient.getMessageErrorSaveClient());
         }
     }
 
@@ -36,7 +39,7 @@ public class ClientServiceImpl implements ClientService {
             clientRepository.deleteById(id);
         }
         catch (RuntimeException e) {
-            throw new ClientRemoveException(UtilMessageClient.getMessageErrorRemoveClient());
+            throw new ClientRemoveException(utilMessageClient.getMessageErrorRemoveClient());
         }
     }
 
@@ -46,7 +49,7 @@ public class ClientServiceImpl implements ClientService {
             return clientRepository.findAll();
         }
         catch (RuntimeException e) {
-            throw new ClientFindAllException(UtilMessageClient.getMessageErrorFindAllClient());
+            throw new ClientFindAllException(utilMessageClient.getMessageErrorFindAllClient());
         }
     }
 
@@ -60,13 +63,13 @@ public class ClientServiceImpl implements ClientService {
             client.setCfpOuCnpj(obj.getCfpOuCnpj());
         }
         catch (RuntimeException e) {
-            throw new ClientNotFoundException(UtilMessageClient.getMessageErrorFindOneClient());
+            throw new ClientNotFoundException(utilMessageClient.getMessageErrorFindOneClient());
         }
         try {
             clientRepository.save(client);
         }
         catch (RuntimeException e) {
-            throw new ClientUpdateException(UtilMessageClient.getMessageErrorUpdateClient());
+            throw new ClientUpdateException(utilMessageClient.getMessageErrorUpdateClient());
         }
 
     }

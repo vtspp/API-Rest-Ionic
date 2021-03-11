@@ -15,9 +15,12 @@ public class OrderServiceImpl implements OrderService {
 
     private OrderRepository orderRepository;
 
+    private UtilMessageOrder utilMessageOrder;
+
     @Autowired
-    public OrderServiceImpl(OrderRepository orderRepository) {
+    public OrderServiceImpl(OrderRepository orderRepository, UtilMessageOrder utilMessageOrder) {
         this.orderRepository = orderRepository;
+        this.utilMessageOrder = utilMessageOrder;
     }
 
     @Override
@@ -26,7 +29,7 @@ public class OrderServiceImpl implements OrderService {
             return orderRepository.save(obj);
         }
         catch (RuntimeException e) {
-            throw new OrderNotSaveException(UtilMessageOrder.getMessageErrorSaveOrder());
+            throw new OrderNotSaveException(utilMessageOrder.getMessageErrorSaveOrder());
         }
     }
 
@@ -36,7 +39,7 @@ public class OrderServiceImpl implements OrderService {
             orderRepository.deleteById(id);
         }
         catch (RuntimeException e) {
-            throw new OrderRemoveException(UtilMessageOrder.getMessageErrorRemoveOrder());
+            throw new OrderRemoveException(utilMessageOrder.getMessageErrorRemoveOrder());
         }
     }
 
@@ -46,7 +49,7 @@ public class OrderServiceImpl implements OrderService {
             return orderRepository.findAll();
         }
         catch (RuntimeException e) {
-            throw new OrderFindAllException(UtilMessageOrder.getMessageErrorFindAllOrder());
+            throw new OrderFindAllException(utilMessageOrder.getMessageErrorFindAllOrder());
         }
     }
 
@@ -61,13 +64,13 @@ public class OrderServiceImpl implements OrderService {
             order.setDeliveryAddress(obj.getDeliveryAddress());
         }
         catch (RuntimeException e) {
-            throw new OrderNotFoundException(UtilMessageOrder.getMessageErrorFindOneOrder());
+            throw new OrderNotFoundException(utilMessageOrder.getMessageErrorFindOneOrder());
         }
         try {
             orderRepository.save(order);
         }
         catch (RuntimeException e) {
-            throw new OrderUpdateException(UtilMessageOrder.getMessageErrorUpdateOrder());
+            throw new OrderUpdateException(utilMessageOrder.getMessageErrorUpdateOrder());
         }
 
     }

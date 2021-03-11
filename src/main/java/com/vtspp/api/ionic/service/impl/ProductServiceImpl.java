@@ -16,9 +16,12 @@ public class ProductServiceImpl implements ProductService {
 
     private ProductRepository productRepository;
 
+    private UtilMessageProduct utilMessageProduct;
+
     @Autowired
-    public ProductServiceImpl (ProductRepository productRepository) {
+    public ProductServiceImpl (ProductRepository productRepository, UtilMessageProduct utilMessageProduct) {
         this.productRepository = productRepository;
+        this.utilMessageProduct = utilMessageProduct;
     }
 
     @Override
@@ -27,7 +30,7 @@ public class ProductServiceImpl implements ProductService {
             return productRepository.save(obj);
         }
         catch (RuntimeException e) {
-            throw new ProductNotSaveException(UtilMessageProduct.getMessageErrorSaveProduct());
+            throw new ProductNotSaveException(utilMessageProduct.getMessageErrorSaveProduct());
         }
     }
 
@@ -37,7 +40,7 @@ public class ProductServiceImpl implements ProductService {
             productRepository.deleteById(id);
         }
         catch (RuntimeException e) {
-            throw new ProductNotFoundException(UtilMessageProduct.getMessageErrorRemoveProduct());
+            throw new ProductNotFoundException(utilMessageProduct.getMessageErrorRemoveProduct());
         }
     }
 
@@ -47,7 +50,7 @@ public class ProductServiceImpl implements ProductService {
             return productRepository.findAll();
         }
         catch (RuntimeException e) {
-            throw new ProductNotFoundException(UtilMessageProduct.getMessageErrorFindAllProduct());
+            throw new ProductNotFoundException(utilMessageProduct.getMessageErrorFindAllProduct());
         }
     }
 
@@ -60,13 +63,13 @@ public class ProductServiceImpl implements ProductService {
             product.setPrice(obj.getPrice());
         }
         catch (RuntimeException e) {
-            throw new ProductNotFoundException(UtilMessageProduct.getMessageErrorFindOneProduct());
+            throw new ProductNotFoundException(utilMessageProduct.getMessageErrorFindOneProduct());
         }
         try {
             productRepository.save(product);
         }
         catch (RuntimeException e) {
-            throw new ProductNotSaveException(UtilMessageProduct.getMessageErrorUpdateProduct());
+            throw new ProductNotSaveException(utilMessageProduct.getMessageErrorUpdateProduct());
         }
     }
 }
