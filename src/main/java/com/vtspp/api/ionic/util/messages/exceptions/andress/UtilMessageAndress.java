@@ -1,6 +1,7 @@
 package com.vtspp.api.ionic.util.messages.exceptions.andress;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
