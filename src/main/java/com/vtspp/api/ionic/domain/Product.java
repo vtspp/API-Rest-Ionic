@@ -23,6 +23,9 @@ public class Product implements Serializable {
     @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
     private List<Category> categories  =  new ArrayList<>();
 
+    @OneToMany(mappedBy = "id.product")
+    private List<ItemOrder> itens = new ArrayList<>();
+
     public Product () {
     }
 
@@ -58,6 +61,20 @@ public class Product implements Serializable {
 
     public List<Category> getCategories() {
         return categories;
+    }
+
+    public List<ItemOrder> getItens() {
+        return itens;
+    }
+
+    public List<Order> getOrders() {
+        List<Order> orderList = new ArrayList<>();
+
+        for (ItemOrder itemOrder : itens){
+            orderList.add(itemOrder.getOrder());
+        }
+
+        return orderList;
     }
 
     @Override

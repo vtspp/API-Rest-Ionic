@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity(name = "tb_order")
@@ -31,6 +33,9 @@ public class Order implements Serializable {
     @JoinColumn(name = "delivery_andress_id")
     @JsonIgnore
     private Andress deliveryAddress;
+
+    @OneToMany(mappedBy = "id.order")
+    private List<ItemOrder> itens = new ArrayList<>();
 
     public Order () {
     }
@@ -81,6 +86,10 @@ public class Order implements Serializable {
 
     public void setDeliveryAddress(Andress deliveryAddress) {
         this.deliveryAddress = deliveryAddress;
+    }
+
+    public List<ItemOrder> getItens() {
+        return itens;
     }
 
     @Override
