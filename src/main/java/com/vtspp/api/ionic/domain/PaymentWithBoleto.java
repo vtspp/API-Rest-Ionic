@@ -20,7 +20,7 @@ public class PaymentWithBoleto extends Payment{
      public PaymentWithBoleto() {
      }
 
-     public PaymentWithBoleto(Integer id, StatusPayment status, Order order, LocalDate dueDate, LocalDate paymentDate) {
+     public PaymentWithBoleto(Integer id, Integer status, Order order, LocalDate dueDate, LocalDate paymentDate) {
           super(id, status, order);
           this.dueDate = dueDate;
           this.paymentDate = paymentDate;

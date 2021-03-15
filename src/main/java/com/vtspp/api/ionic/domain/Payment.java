@@ -28,9 +28,9 @@ public class Payment implements Serializable {
     public  Payment (){
     }
 
-    public Payment(Integer id, StatusPayment status, Order order) {
+    public Payment(Integer id, Integer status, Order order) {
         this.id = id;
-        this.status = status.getCode();
+        this.status = status;
         this.order = order;
     }
 
@@ -43,12 +43,12 @@ public class Payment implements Serializable {
     }
 
     @Enumerated(EnumType.ORDINAL)
-    public StatusPayment getStatus() {
-        return Converter.toEnum(StatusPayment.class.getEnumConstants(), status);
+    public String getStatus() {
+        return Converter.toEnum(StatusPayment.class.getEnumConstants(), status).getDescription();
     }
 
-    public void setStatus(StatusPayment status) {
-        this.status = status.getCode();
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public Order getOrder() {

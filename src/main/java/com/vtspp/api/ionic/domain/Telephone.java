@@ -1,5 +1,7 @@
 package com.vtspp.api.ionic.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -15,6 +17,7 @@ public class Telephone implements Serializable {
     @ManyToOne
     @JoinColumn(name = "client_id")
     @MapsId
+    @JsonIgnore
     private Client client;
 
     public Telephone () {

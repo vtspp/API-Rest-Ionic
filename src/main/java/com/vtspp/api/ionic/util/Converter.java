@@ -23,7 +23,7 @@ public class Converter {
 
         for (int i = 0; i < elements.length; i++) {
 
-            if (elements[i].equals(code)) return elements[code];
+            if (elements[i].equals(elements[code])) return elements[code];
         }
         throw new IllegalArgumentException(String.format("Id %d inválida.", code));
     }

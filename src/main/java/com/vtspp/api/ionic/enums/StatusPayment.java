@@ -2,9 +2,9 @@ package com.vtspp.api.ionic.enums;
 
 public enum StatusPayment {
 
-    PENDING (0, "pendente"),
-    PAID (1, "quitado"),
-    CANCELED (2, "cancelado");
+    PENDING (0, "Pendente"),
+    PAID (1, "Quitado"),
+    CANCELED (2, "Cancelado");
 
     private Integer code;
     private String description;

@@ -1,6 +1,6 @@
 package com.vtspp.api.ionic.domain;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -21,7 +21,6 @@ public class Product implements Serializable {
     @ManyToMany
     @JoinTable(name = "tb_product_category", joinColumns =
     @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
-    @JsonManagedReference
     private List<Category> categories  =  new ArrayList<>();
 
     public Product () {

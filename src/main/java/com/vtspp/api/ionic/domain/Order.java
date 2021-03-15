@@ -1,6 +1,7 @@
 package com.vtspp.api.ionic.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -28,6 +29,7 @@ public class Order implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "delivery_andress_id")
+    @JsonIgnore
     private Andress deliveryAddress;
 
     public Order () {

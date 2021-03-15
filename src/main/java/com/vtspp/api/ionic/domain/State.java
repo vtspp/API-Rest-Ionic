@@ -1,5 +1,7 @@
 package com.vtspp.api.ionic.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -15,6 +17,7 @@ public class State implements Serializable {
     private String name;
 
     @OneToMany(mappedBy = "state")
+    @JsonIgnore
     List<City> cities = new ArrayList<>();
 
     public State (){

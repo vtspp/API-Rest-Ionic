@@ -17,15 +17,16 @@ public class Client implements Serializable {
     private Integer id;
     private String name;
     private String email;
-    private String CfpOuCnpj;
+    private String cfpOuCnpj;
 
     @JoinColumn(name = "type_client_id")
     private Integer typeClient;
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "client")
     private List<Andress> andresses = new ArrayList<>();
 
     @OneToMany(mappedBy = "client")
+    @JsonIgnore
     private List<Order> orders = new ArrayList<>();
 
     @OneToMany(mappedBy = "client")
@@ -34,12 +35,12 @@ public class Client implements Serializable {
     public Client (){
     }
 
-    public Client(Integer id, String name, String email, String cfpOuCnpj, TypeClient typeClient) {
+    public Client(Integer id, String name, String email, String cfpOuCnpj, Integer typeClient) {
         this.id = id;
         this.name = name;
         this.email = email;
-        CfpOuCnpj = cfpOuCnpj;
-        this.typeClient = typeClient.getCode();
+        this.cfpOuCnpj = cfpOuCnpj;
+        this.typeClient = typeClient;
     }
 
     public Integer getId() {
@@ -67,20 +68,20 @@ public class Client implements Serializable {
     }
 
     public String getCfpOuCnpj() {
-        return CfpOuCnpj;
+        return cfpOuCnpj;
     }
 
     public void setCfpOuCnpj(String cfpOuCnpj) {
-        CfpOuCnpj = cfpOuCnpj;
+        this.cfpOuCnpj = cfpOuCnpj;
     }
 
     @Enumerated(EnumType.ORDINAL)
-    public TypeClient getTypeClient() {
-        return Converter.toEnum(TypeClient.class.getEnumConstants(), typeClient);
+    public String getTypeClient() {
+        return Converter.toEnum(TypeClient.class.getEnumConstants(), typeClient).getDescription();
     }
 
-    public void setTypeClient(TypeClient typeClient) {
-        this.typeClient = typeClient.getCode();
+    public void setTypeClient(Integer typeClient) {
+        this.typeClient = typeClient;
     }
 
     public List<Andress> getAndresses() {
