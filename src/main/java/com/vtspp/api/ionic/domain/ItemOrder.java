@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import java.io.Serializable;
 import java.util.Objects;
 
-@Entity
+@Entity(name = "tb_item_order")
 public class ItemOrder implements Serializable {
     private static final long serialVersionUID = 1L;
 
