@@ -31,10 +31,10 @@ public class Order implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "delivery_andress_id")
-    @JsonIgnore
     private Andress deliveryAddress;
 
     @OneToMany(mappedBy = "id.order")
+    @JsonIgnore
     private List<ItemOrder> itens = new ArrayList<>();
 
     public Order () {

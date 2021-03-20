@@ -1,5 +1,7 @@
 package com.vtspp.api.ionic.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import java.io.Serializable;
@@ -10,6 +12,7 @@ public class ItemOrder implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @EmbeddedId
+    @JsonIgnore
     private ItemOrderPK id = new ItemOrderPK();
     private Double discount;
     private Integer quantity;

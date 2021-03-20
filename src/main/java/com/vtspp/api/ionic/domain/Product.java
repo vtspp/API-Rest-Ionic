@@ -1,5 +1,7 @@
 package com.vtspp.api.ionic.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,21 +18,22 @@ public class Product implements Serializable {
     private String name;
     private Double price;
 
-    @ManyToMany
-    @JoinTable(name = "tb_product_category", joinColumns =
-    @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private List<Category> categories  =  new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category ;
 
     @OneToMany(mappedBy = "id.product")
-    private List<ItemOrder> itens = new ArrayList<>();
+    @JsonIgnore
+    private List<ItemOrder> orders = new ArrayList<>();
 
     public Product () {
     }
 
-    public Product(Integer id, String name, Double price) {
+    public Product(Integer id, String name, Double price, Category category) {
         this.id = id;
         this.name = name;
         this.price = price;
+        this.category = category;
     }
 
     public Integer getId() {
@@ -57,18 +60,19 @@ public class Product implements Serializable {
         this.price = price;
     }
 
-    public List<Category> getCategories() {
-        return categories;
+    public Category getCategory() {
+        return category;
     }
 
-    public List<ItemOrder> getItens() {
-        return itens;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
+    @JsonIgnore
     public List<Order> getOrders() {
         List<Order> orderList = new ArrayList<>();
 
-        for (ItemOrder itemOrder : itens){
+        for (ItemOrder itemOrder : orders){
             orderList.add(itemOrder.getOrder());
         }
 

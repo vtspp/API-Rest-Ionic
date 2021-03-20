@@ -1,5 +1,7 @@
 package com.vtspp.api.ionic.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -17,6 +19,7 @@ public class Category implements Serializable {
 
     @ManyToMany
     @JoinColumn(name = "product_id")
+    @JsonIgnore
     private List<Product> products = new ArrayList<>();
 
     public Category () {
