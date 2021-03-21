@@ -73,4 +73,9 @@ public class ProductServiceImpl implements ProductService {
             throw new ProductNotSaveException(utilMessageProduct.getMessageErrorUpdateProduct());
         }
     }
+
+    @Override
+    public Product findOne(Integer id) throws RuntimeException {
+        return null;
+    }
 }

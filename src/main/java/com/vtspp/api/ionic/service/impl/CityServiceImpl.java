@@ -71,4 +71,9 @@ public class CityServiceImpl implements CityService {
         }
 
     }
+
+    @Override
+    public City findOne(Integer id) throws RuntimeException {
+        return null;
+    }
 }

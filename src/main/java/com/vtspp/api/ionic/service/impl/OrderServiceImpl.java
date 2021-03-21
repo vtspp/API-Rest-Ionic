@@ -74,4 +74,9 @@ public class OrderServiceImpl implements OrderService {
         }
 
     }
+
+    @Override
+    public Order findOne(Integer id) throws RuntimeException {
+        return null;
+    }
 }
