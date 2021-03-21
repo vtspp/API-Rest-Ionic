@@ -74,4 +74,9 @@ public class ItemOrderServiceImpl implements ItemOrderService {
         }
 
     }
+
+    @Override
+    public ItemOrder findOne(Integer id) throws RuntimeException {
+        return null;
+    }
 }

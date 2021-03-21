@@ -72,4 +72,9 @@ public class CategoryServiceImpl implements CategoryService {
         }
 
     }
+
+    @Override
+    public Category findOne(Integer id) throws RuntimeException {
+        return null;
+    }
 }
