@@ -71,9 +71,4 @@ public class StateServiceImpl implements StateService {
         }
 
     }
-
-    @Override
-    public State findOne(Integer id) throws RuntimeException {
-        return null;
-    }
 }

@@ -77,9 +77,4 @@ public class AndressServiceImpl implements AndressService {
         }
 
     }
-
-    @Override
-    public Andress findOne(Integer id) throws RuntimeException {
-        return null;
-    }
 }

@@ -8,5 +8,4 @@ public interface Services<T> {
     void remove (Integer id) throws RuntimeException;
     List<T> findAll () throws RuntimeException;
     void update (T obj) throws RuntimeException;
-    T findOne (Integer id) throws RuntimeException;
 }

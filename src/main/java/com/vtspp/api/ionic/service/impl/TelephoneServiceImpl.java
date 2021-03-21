@@ -71,9 +71,4 @@ public class TelephoneServiceImpl implements TelephoneService {
         }
 
     }
-
-    @Override
-    public Telephone findOne(Integer id) throws RuntimeException {
-        return null;
-    }
 }

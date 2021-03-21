@@ -73,9 +73,4 @@ public class ClientServiceImpl implements ClientService {
         }
 
     }
-
-    @Override
-    public Client findOne(Integer id) throws RuntimeException {
-        return null;
-    }
 }
