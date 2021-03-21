@@ -20,6 +20,7 @@ public class Product implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "category_id")
+    @JsonIgnore
     private Category category ;
 
     @OneToMany(mappedBy = "id.product")

@@ -59,6 +59,7 @@ public class CategoryServiceImpl implements CategoryService {
         try {
             category = categoryRepository.getOne(obj.getId());
             category.setName(obj.getName());
+            category.setProducts(obj.getProducts());
         }
         catch (RuntimeException e) {
             throw new CategoryNotFoundException(utilMessageCategory.getMessageErrorFindOneCategory());

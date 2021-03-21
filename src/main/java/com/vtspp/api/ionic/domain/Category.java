@@ -1,11 +1,7 @@
 package com.vtspp.api.ionic.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 @Entity(name = "tb_category")
@@ -17,17 +13,17 @@ public class Category implements Serializable {
     private Integer id;
     private String name;
 
-    @ManyToMany
+    @ManyToOne
     @JoinColumn(name = "product_id")
-    @JsonIgnore
-    private List<Product> products = new ArrayList<>();
+    private Product product;
 
     public Category () {
     }
 
-    public Category(Integer id, String name) {
+    public Category(Integer id, String name, Product product) {
         this.id = id;
         this.name = name;
+        this.product = product;
     }
 
     public Integer getId() {
@@ -46,8 +42,12 @@ public class Category implements Serializable {
         this.name = name;
     }
 
-    public List<Product> getProducts() {
-        return products;
+    public Product getProducts() {
+        return product;
+    }
+
+    public void setProducts(Product product) {
+        this.product = product;
     }
 
     @Override
