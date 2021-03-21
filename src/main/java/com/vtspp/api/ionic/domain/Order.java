@@ -34,7 +34,6 @@ public class Order implements Serializable {
     private Andress deliveryAddress;
 
     @OneToMany(mappedBy = "id.order")
-    @JsonIgnore
     private List<ItemOrder> itens = new ArrayList<>();
 
     public Order () {
@@ -90,6 +89,15 @@ public class Order implements Serializable {
 
     public List<ItemOrder> getItens() {
         return itens;
+    }
+
+    public Double getAmount() {
+        double sum = 0.0;
+
+        for(ItemOrder itemOrder : itens) {
+            sum += itemOrder.getSubTotal();
+        }
+        return sum;
     }
 
     @Override
