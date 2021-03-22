@@ -1,6 +1,7 @@
 package com.vtspp.api.ionic.resource.impl;
 
 import com.vtspp.api.ionic.domain.Product;
+import com.vtspp.api.ionic.dto.CategoryDTO;
 import com.vtspp.api.ionic.resource.ProductResources;
 import com.vtspp.api.ionic.service.impl.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,5 +50,10 @@ public class ProductResourcesImpl implements ProductResources {
     public ResponseEntity<Void> update(@RequestBody Product obj) {
         productService.update(obj);
         return ResponseEntity.noContent().build();
+    }
+
+    @Override
+    public ResponseEntity<CategoryDTO> findOne(Integer id) {
+        return null;
     }
 }

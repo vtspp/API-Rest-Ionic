@@ -1,6 +1,7 @@
 package com.vtspp.api.ionic.resource.impl;
 
 import com.vtspp.api.ionic.domain.Order;
+import com.vtspp.api.ionic.dto.CategoryDTO;
 import com.vtspp.api.ionic.resource.OrderResources;
 import com.vtspp.api.ionic.service.impl.OrderServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,5 +50,10 @@ public class OrderResourcesImpl implements OrderResources {
     public ResponseEntity<Void> update(@RequestBody Order obj) {
         orderService.update(obj);
         return ResponseEntity.ok().build();
+    }
+
+    @Override
+    public ResponseEntity<CategoryDTO> findOne(Integer id) {
+        return null;
     }
 }

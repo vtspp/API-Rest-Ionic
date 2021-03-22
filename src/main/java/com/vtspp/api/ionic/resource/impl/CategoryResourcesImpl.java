@@ -1,6 +1,7 @@
 package com.vtspp.api.ionic.resource.impl;
 
 import com.vtspp.api.ionic.domain.Category;
+import com.vtspp.api.ionic.dto.CategoryDTO;
 import com.vtspp.api.ionic.resource.CategoryResources;
 import com.vtspp.api.ionic.service.impl.CategoryServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,5 +50,11 @@ public class CategoryResourcesImpl implements CategoryResources {
     public ResponseEntity<Void> update(@RequestBody Category obj) {
         categoryService.update(obj);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/{id}")
+    @Override
+    public ResponseEntity<CategoryDTO> findOne(@PathVariable  Integer id) {
+        return ResponseEntity.ok(categoryService.findOne(id));
     }
 }

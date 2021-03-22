@@ -1,6 +1,7 @@
 package com.vtspp.api.ionic.service.impl;
 
 import com.vtspp.api.ionic.domain.Product;
+import com.vtspp.api.ionic.dto.CategoryDTO;
 import com.vtspp.api.ionic.repositories.ProductRepository;
 import com.vtspp.api.ionic.service.ProductService;
 import com.vtspp.api.ionic.service.exceptions.product.ProductNotFoundException;
@@ -27,7 +28,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product save(Product obj) throws ProductNotSaveException {
         try {
-            return productRepository.save(obj);
+            return productRepository.saveAndFlush(obj);
         }
         catch (RuntimeException e) {
             throw new ProductNotSaveException(utilMessageProduct.getMessageErrorSaveProduct());
@@ -67,7 +68,7 @@ public class ProductServiceImpl implements ProductService {
             throw new ProductNotFoundException(utilMessageProduct.getMessageErrorFindOneProduct());
         }
         try {
-            productRepository.save(product);
+            productRepository.saveAndFlush(product);
         }
         catch (RuntimeException e) {
             throw new ProductNotSaveException(utilMessageProduct.getMessageErrorUpdateProduct());
@@ -75,7 +76,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product findOne(Integer id) throws RuntimeException {
+    public CategoryDTO findOne(Integer id) throws RuntimeException {
         return null;
     }
 }

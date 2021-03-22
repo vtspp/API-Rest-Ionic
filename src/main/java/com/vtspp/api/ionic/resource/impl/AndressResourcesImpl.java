@@ -1,11 +1,9 @@
 package com.vtspp.api.ionic.resource.impl;
 
 import com.vtspp.api.ionic.domain.Andress;
-import com.vtspp.api.ionic.domain.Category;
+import com.vtspp.api.ionic.dto.CategoryDTO;
 import com.vtspp.api.ionic.resource.AndressResources;
-import com.vtspp.api.ionic.resource.CategoryResources;
 import com.vtspp.api.ionic.service.impl.AndressServiceImpl;
-import com.vtspp.api.ionic.service.impl.CategoryServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -52,5 +50,10 @@ public class AndressResourcesImpl implements AndressResources {
     public ResponseEntity<Void> update(@RequestBody Andress obj) {
         andressService.update(obj);
         return ResponseEntity.ok().build();
+    }
+
+    @Override
+    public ResponseEntity<CategoryDTO> findOne(Integer id) {
+        return null;
     }
 }

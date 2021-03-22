@@ -1,6 +1,7 @@
 package com.vtspp.api.ionic.resource.impl;
 
 import com.vtspp.api.ionic.domain.Client;
+import com.vtspp.api.ionic.dto.CategoryDTO;
 import com.vtspp.api.ionic.resource.ClientResources;
 import com.vtspp.api.ionic.service.impl.ClientServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,5 +50,10 @@ public class ClientResourcesImpl implements ClientResources {
     public ResponseEntity<Void> update(@RequestBody Client obj) {
         clientService.update(obj);
         return ResponseEntity.ok().build();
+    }
+
+    @Override
+    public ResponseEntity<CategoryDTO> findOne(Integer id) {
+        return null;
     }
 }

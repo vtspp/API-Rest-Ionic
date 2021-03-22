@@ -1,6 +1,7 @@
 package com.vtspp.api.ionic.service.impl;
 
 import com.vtspp.api.ionic.domain.Order;
+import com.vtspp.api.ionic.dto.CategoryDTO;
 import com.vtspp.api.ionic.repositories.OrderRepository;
 import com.vtspp.api.ionic.service.OrderService;
 import com.vtspp.api.ionic.service.exceptions.order.*;
@@ -76,7 +77,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order findOne(Integer id) throws RuntimeException {
+    public CategoryDTO findOne(Integer id) throws RuntimeException {
         return null;
     }
 }

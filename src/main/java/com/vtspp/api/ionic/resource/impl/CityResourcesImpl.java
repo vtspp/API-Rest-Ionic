@@ -1,6 +1,7 @@
 package com.vtspp.api.ionic.resource.impl;
 
 import com.vtspp.api.ionic.domain.City;
+import com.vtspp.api.ionic.dto.CategoryDTO;
 import com.vtspp.api.ionic.resource.CityResources;
 import com.vtspp.api.ionic.service.impl.CityServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,5 +50,10 @@ public class CityResourcesImpl implements CityResources {
     public ResponseEntity<Void> update(@RequestBody City obj) {
         cityService.update(obj);
         return ResponseEntity.ok().build();
+    }
+
+    @Override
+    public ResponseEntity<CategoryDTO> findOne(Integer id) {
+        return null;
     }
 }

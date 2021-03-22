@@ -1,11 +1,9 @@
 package com.vtspp.api.ionic.resource.impl;
 
 import com.vtspp.api.ionic.domain.ItemOrder;
-import com.vtspp.api.ionic.domain.Order;
+import com.vtspp.api.ionic.dto.CategoryDTO;
 import com.vtspp.api.ionic.resource.ItemOrderResources;
-import com.vtspp.api.ionic.resource.OrderResources;
 import com.vtspp.api.ionic.service.impl.ItemOrderServiceImpl;
-import com.vtspp.api.ionic.service.impl.OrderServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -52,5 +50,10 @@ public class ItemOrderResourcesImpl implements ItemOrderResources {
     public ResponseEntity<Void> update(@RequestBody ItemOrder obj) {
         itemOrderService.update(obj);
         return ResponseEntity.ok().build();
+    }
+
+    @Override
+    public ResponseEntity<CategoryDTO> findOne(Integer id) {
+        return null;
     }
 }

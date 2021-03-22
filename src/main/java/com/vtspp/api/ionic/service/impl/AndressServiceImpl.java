@@ -1,6 +1,7 @@
 package com.vtspp.api.ionic.service.impl;
 
 import com.vtspp.api.ionic.domain.Andress;
+import com.vtspp.api.ionic.dto.CategoryDTO;
 import com.vtspp.api.ionic.repositories.AndressRepository;
 import com.vtspp.api.ionic.service.AndressService;
 import com.vtspp.api.ionic.service.exceptions.andress.*;
@@ -79,7 +80,7 @@ public class AndressServiceImpl implements AndressService {
     }
 
     @Override
-    public Andress findOne(Integer id) throws RuntimeException {
+    public CategoryDTO findOne(Integer id) throws RuntimeException {
         return null;
     }
 }

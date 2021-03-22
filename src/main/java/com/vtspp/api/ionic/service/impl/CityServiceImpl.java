@@ -1,6 +1,7 @@
 package com.vtspp.api.ionic.service.impl;
 
 import com.vtspp.api.ionic.domain.City;
+import com.vtspp.api.ionic.dto.CategoryDTO;
 import com.vtspp.api.ionic.repositories.CityRepository;
 import com.vtspp.api.ionic.service.CityService;
 import com.vtspp.api.ionic.service.exceptions.city.*;
@@ -73,7 +74,7 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
-    public City findOne(Integer id) throws RuntimeException {
+    public CategoryDTO findOne(Integer id) throws RuntimeException {
         return null;
     }
 }

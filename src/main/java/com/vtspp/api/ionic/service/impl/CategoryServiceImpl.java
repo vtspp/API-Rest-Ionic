@@ -1,6 +1,7 @@
 package com.vtspp.api.ionic.service.impl;
 
 import com.vtspp.api.ionic.domain.Category;
+import com.vtspp.api.ionic.dto.CategoryDTO;
 import com.vtspp.api.ionic.repositories.CategoryRepository;
 import com.vtspp.api.ionic.service.CategoryService;
 import com.vtspp.api.ionic.service.exceptions.category.*;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+import static com.vtspp.api.ionic.util.Check.isNull;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -26,7 +29,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public Category save(Category obj) throws CategoryNotSaveException {
         try {
-            return categoryRepository.save(obj);
+            return categoryRepository.saveAndFlush(obj);
         }
         catch (RuntimeException e) {
             throw new CategoryNotSaveException(utilMessageCategory.getMessageErrorSaveCategory());
@@ -65,7 +68,7 @@ public class CategoryServiceImpl implements CategoryService {
             throw new CategoryNotFoundException(utilMessageCategory.getMessageErrorFindOneCategory());
         }
         try {
-            categoryRepository.save(category);
+            categoryRepository.saveAndFlush(category);
         }
         catch (RuntimeException e) {
             throw new CategoryUpdateException(utilMessageCategory.getMessageErrorUpdateCategory());
@@ -74,7 +77,17 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Category findOne(Integer id) throws RuntimeException {
-        return null;
+    public CategoryDTO findOne(Integer id) throws RuntimeException {
+
+        if(isNull(id))
+            throw new IllegalArgumentException(utilMessageCategory.getMessageErrorFindOneCategory());
+        try {
+            CategoryDTO category = new CategoryDTO(categoryRepository.getOne(id));
+            return category;
+        }
+        catch (RuntimeException e) {
+            throw new CategoryNotFoundException(utilMessageCategory.getMessageErrorFindOneCategory());
+        }
+
     }
 }
