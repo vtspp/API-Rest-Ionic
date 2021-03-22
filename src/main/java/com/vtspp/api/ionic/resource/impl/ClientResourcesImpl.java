@@ -22,31 +22,27 @@ public class ClientResourcesImpl implements ClientResources {
         this.clientService = clientService;
     }
 
-    @PostMapping
     @Override
-    public ResponseEntity<Void> save(@RequestBody Client obj) {
+    public ResponseEntity<Void> save(Client obj) {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri()
                 .path("/{id}")
                 .buildAndExpand(clientService.save(obj).getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 
-    @DeleteMapping("/{id}")
     @Override
-    public ResponseEntity<Void> remove(@PathVariable Integer id) {
+    public ResponseEntity<Void> remove(Integer id) {
         clientService.remove(id);
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping
     @Override
     public ResponseEntity<List<Client>> findAll() {
         return ResponseEntity.ok(clientService.findAll());
     }
 
-    @PutMapping
     @Override
-    public ResponseEntity<Void> update(@RequestBody Client obj) {
+    public ResponseEntity<Void> update(Client obj) {
         clientService.update(obj);
         return ResponseEntity.ok().build();
     }
@@ -57,7 +53,9 @@ public class ClientResourcesImpl implements ClientResources {
     }
 
     @Override
-    public ResponseEntity<Client> findPage(Integer page, Integer linePerPage, String orderBy, String direction) {
+    public ResponseEntity<?> findPage(Integer page, Integer linePerPage, String direction, String orderBy) {
         return null;
     }
+
+
 }

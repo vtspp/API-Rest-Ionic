@@ -24,7 +24,7 @@ public class ProductResourcesImpl implements ProductResources {
 
     @PostMapping
     @Override
-    public ResponseEntity<Void> save(@RequestBody Product obj) {
+    public ResponseEntity<Void> save(Product obj) {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(productService.save(obj).getId()).toUri();
@@ -33,7 +33,7 @@ public class ProductResourcesImpl implements ProductResources {
 
     @DeleteMapping("/{id}")
     @Override
-    public ResponseEntity<Void> remove(@PathVariable Integer id) {
+    public ResponseEntity<Void> remove(Integer id) {
         productService.remove(id);
         return ResponseEntity.noContent().build();
     }
@@ -46,7 +46,7 @@ public class ProductResourcesImpl implements ProductResources {
 
     @PutMapping
     @Override
-    public ResponseEntity<Void> update(@RequestBody Product obj) {
+    public ResponseEntity<Void> update(Product obj) {
         productService.update(obj);
         return ResponseEntity.noContent().build();
     }
@@ -57,7 +57,9 @@ public class ProductResourcesImpl implements ProductResources {
     }
 
     @Override
-    public ResponseEntity<Product> findPage(Integer page, Integer linePerPage, String orderBy, String direction) {
+    public ResponseEntity<?> findPage(Integer page, Integer linePerPage, String direction, String orderBy) {
         return null;
     }
+
+
 }

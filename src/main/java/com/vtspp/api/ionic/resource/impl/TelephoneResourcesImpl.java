@@ -22,31 +22,27 @@ public class TelephoneResourcesImpl implements TelephoneResources {
         this.telephoneService = telephoneService;
     }
 
-    @PostMapping
     @Override
-    public ResponseEntity<Void> save(@RequestBody Telephone obj) {
+    public ResponseEntity<Void> save(Telephone obj) {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri()
                 .path("/{id}")
                 .buildAndExpand(telephoneService.save(obj).getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 
-    @DeleteMapping("/{id}")
     @Override
-    public ResponseEntity<Void> remove(@PathVariable Integer id) {
+    public ResponseEntity<Void> remove(Integer id) {
         telephoneService.remove(id);
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping
     @Override
     public ResponseEntity<List<Telephone>> findAll() {
         return ResponseEntity.ok(telephoneService.findAll());
     }
 
-    @PutMapping
     @Override
-    public ResponseEntity<Void> update(@RequestBody Telephone obj) {
+    public ResponseEntity<Void> update(Telephone obj) {
         telephoneService.update(obj);
         return ResponseEntity.ok().build();
     }
@@ -57,7 +53,9 @@ public class TelephoneResourcesImpl implements TelephoneResources {
     }
 
     @Override
-    public ResponseEntity<Telephone> findPage(Integer page, Integer linePerPage, String orderBy, String direction) {
+    public ResponseEntity<?> findPage(Integer page, Integer linePerPage, String direction, String orderBy) {
         return null;
     }
+
+
 }

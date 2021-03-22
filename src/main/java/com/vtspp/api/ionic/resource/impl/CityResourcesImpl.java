@@ -22,31 +22,27 @@ public class CityResourcesImpl implements CityResources {
         this.cityService = cityService;
     }
 
-    @PostMapping
     @Override
-    public ResponseEntity<Void> save(@RequestBody City obj) {
+    public ResponseEntity<Void> save(City obj) {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri()
                 .path("/{id}")
                 .buildAndExpand(cityService.save(obj).getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 
-    @DeleteMapping("/{id}")
     @Override
-    public ResponseEntity<Void> remove(@PathVariable Integer id) {
+    public ResponseEntity<Void> remove(Integer id) {
         cityService.remove(id);
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping
     @Override
     public ResponseEntity<List<City>> findAll() {
         return ResponseEntity.ok(cityService.findAll());
     }
 
-    @PutMapping
     @Override
-    public ResponseEntity<Void> update(@RequestBody City obj) {
+    public ResponseEntity<Void> update(City obj) {
         cityService.update(obj);
         return ResponseEntity.ok().build();
     }
@@ -57,7 +53,9 @@ public class CityResourcesImpl implements CityResources {
     }
 
     @Override
-    public ResponseEntity<City> findPage(Integer page, Integer linePerPage, String orderBy, String direction) {
+    public ResponseEntity<?> findPage(Integer page, Integer linePerPage, String direction, String orderBy) {
         return null;
     }
+
+
 }

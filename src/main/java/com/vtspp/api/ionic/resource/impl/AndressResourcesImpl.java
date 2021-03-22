@@ -22,31 +22,27 @@ public class AndressResourcesImpl implements AndressResources {
         this.andressService = andressService;
     }
 
-    @PostMapping
     @Override
-    public ResponseEntity<Void> save(@RequestBody Andress obj) {
+    public ResponseEntity<Void> save(Andress obj) {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri()
                 .path("/{id}")
                 .buildAndExpand(andressService.save(obj).getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 
-    @DeleteMapping("/{id}")
     @Override
-    public ResponseEntity<Void> remove(@PathVariable Integer id) {
+    public ResponseEntity<Void> remove(Integer id) {
         andressService.remove(id);
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping
     @Override
     public ResponseEntity<List<Andress>> findAll() {
         return ResponseEntity.ok(andressService.findAll());
     }
 
-    @PutMapping
     @Override
-    public ResponseEntity<Void> update(@RequestBody Andress obj) {
+    public ResponseEntity<Void> update(Andress obj) {
         andressService.update(obj);
         return ResponseEntity.ok().build();
     }
@@ -57,7 +53,9 @@ public class AndressResourcesImpl implements AndressResources {
     }
 
     @Override
-    public ResponseEntity<Andress> findPage(Integer page, Integer linePerPage, String orderBy, String direction) {
+    public ResponseEntity<?> findPage(Integer page, Integer linePerPage, String direction, String orderBy) {
         return null;
     }
+
+
 }

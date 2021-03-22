@@ -24,47 +24,38 @@ public class CategoryResourcesImpl implements CategoryResources {
         this.categoryService = categoryService;
     }
 
-    @PostMapping
     @Override
-    public ResponseEntity<Void> save(@RequestBody Category obj) {
+    public ResponseEntity<Void> save(Category obj) {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri()
                 .path("/{id}")
                 .buildAndExpand(categoryService.save(obj).getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 
-    @DeleteMapping("/{id}")
     @Override
-    public ResponseEntity<Void> remove(@PathVariable Integer id) {
+    public ResponseEntity<Void> remove(Integer id) {
         categoryService.remove(id);
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping
     @Override
     public ResponseEntity<List<Category>> findAll() {
         return ResponseEntity.ok(categoryService.findAll());
     }
 
-    @PutMapping
     @Override
-    public ResponseEntity<Void> update(@RequestBody Category obj) {
+    public ResponseEntity<Void> update(Category obj) {
         categoryService.update(obj);
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/{id}")
     @Override
-    public ResponseEntity<?> findOne(@PathVariable  Integer id) {
+    public ResponseEntity<?> findOne(Integer id) {
         return ResponseEntity.ok(new CategoryDTO(categoryService.findOne(id)));
     }
 
-    @GetMapping("/page")
     @Override
-    public ResponseEntity<Page<Category>> findPage(@RequestParam(defaultValue = "0") Integer page,
-                                                                              @RequestParam(defaultValue = "24") Integer linePerPage,
-                                                                              @RequestParam(defaultValue = "ASC") String direction,
-                                                                              @RequestParam(defaultValue = "name") String orderBy) {
+    public ResponseEntity<Page<Category>> findPage( Integer page, Integer linePerPage, String direction, String orderBy) {
         Page<Category> list = categoryService.findPage(page, linePerPage, direction, orderBy);
         return ResponseEntity.ok(list);
     }

@@ -22,31 +22,27 @@ public class OrderResourcesImpl implements OrderResources {
         this.orderService = orderService;
     }
 
-    @PostMapping
     @Override
-    public ResponseEntity<Void> save(@RequestBody Order obj) {
+    public ResponseEntity<Void> save(Order obj) {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri()
                 .path("/{id}")
                 .buildAndExpand(orderService.save(obj).getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 
-    @DeleteMapping("/{id}")
     @Override
-    public ResponseEntity<Void> remove(@PathVariable Integer id) {
+    public ResponseEntity<Void> remove(Integer id) {
         orderService.remove(id);
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping
     @Override
     public ResponseEntity<List<Order>> findAll() {
         return ResponseEntity.ok(orderService.findAll());
     }
 
-    @PutMapping
     @Override
-    public ResponseEntity<Void> update(@RequestBody Order obj) {
+    public ResponseEntity<Void> update(Order obj) {
         orderService.update(obj);
         return ResponseEntity.ok().build();
     }
@@ -57,7 +53,8 @@ public class OrderResourcesImpl implements OrderResources {
     }
 
     @Override
-    public ResponseEntity<Order> findPage(Integer page, Integer linePerPage, String orderBy, String direction) {
+    public ResponseEntity<?> findPage(Integer page, Integer linePerPage, String direction, String orderBy) {
         return null;
     }
+
 }
