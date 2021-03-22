@@ -11,4 +11,5 @@ public interface Resources <T>{
     ResponseEntity<List<T>> findAll();
     ResponseEntity<Void> update (T obj);
     ResponseEntity<?> findOne (Integer id);
+    ResponseEntity<?> findPage (Integer page, Integer linePerPage, String orderBy, String direction);
 }

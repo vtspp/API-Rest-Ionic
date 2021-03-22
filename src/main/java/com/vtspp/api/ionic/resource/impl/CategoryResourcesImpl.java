@@ -5,6 +5,7 @@ import com.vtspp.api.ionic.dto.CategoryDTO;
 import com.vtspp.api.ionic.resource.CategoryResources;
 import com.vtspp.api.ionic.service.impl.CategoryServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -56,5 +57,15 @@ public class CategoryResourcesImpl implements CategoryResources {
     @Override
     public ResponseEntity<?> findOne(@PathVariable  Integer id) {
         return ResponseEntity.ok(new CategoryDTO(categoryService.findOne(id)));
+    }
+
+    @GetMapping("/page")
+    @Override
+    public ResponseEntity<Page<Category>> findPage(@RequestParam(defaultValue = "0") Integer page,
+                                                                              @RequestParam(defaultValue = "24") Integer linePerPage,
+                                                                              @RequestParam(defaultValue = "ASC") String direction,
+                                                                              @RequestParam(defaultValue = "name") String orderBy) {
+        Page<Category> list = categoryService.findPage(page, linePerPage, direction, orderBy);
+        return ResponseEntity.ok(list);
     }
 }

@@ -1,13 +1,14 @@
 package com.vtspp.api.ionic.service.impl;
 
 import com.vtspp.api.ionic.domain.Category;
-import com.vtspp.api.ionic.dto.CategoryDTO;
 import com.vtspp.api.ionic.repositories.CategoryRepository;
 import com.vtspp.api.ionic.service.CategoryService;
 import com.vtspp.api.ionic.service.exceptions.category.*;
 import com.vtspp.api.ionic.util.messages.exceptions.category.UtilMessageCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -93,7 +94,8 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Page<Category> findPage(Integer page, Integer linePerPage, String orderBy, String direction) {
-        return null;
+    public Page<Category> findPage(Integer page, Integer linePerPage, String direction, String orderBy) {
+        PageRequest pageRequest = PageRequest.of(page, linePerPage, Sort.Direction.valueOf(direction), orderBy);
+        return categoryRepository.findAll(pageRequest);
     }
 }

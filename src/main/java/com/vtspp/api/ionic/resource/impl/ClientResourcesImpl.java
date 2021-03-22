@@ -55,4 +55,9 @@ public class ClientResourcesImpl implements ClientResources {
     public ResponseEntity<?> findOne(Integer id) {
         return null;
     }
+
+    @Override
+    public ResponseEntity<Client> findPage(Integer page, Integer linePerPage, String orderBy, String direction) {
+        return null;
+    }
 }

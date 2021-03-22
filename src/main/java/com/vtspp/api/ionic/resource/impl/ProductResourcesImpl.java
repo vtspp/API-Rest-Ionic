@@ -55,4 +55,9 @@ public class ProductResourcesImpl implements ProductResources {
     public ResponseEntity<?> findOne(Integer id) {
         return null;
     }
+
+    @Override
+    public ResponseEntity<Product> findPage(Integer page, Integer linePerPage, String orderBy, String direction) {
+        return null;
+    }
 }

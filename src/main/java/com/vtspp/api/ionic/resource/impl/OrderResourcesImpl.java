@@ -55,4 +55,9 @@ public class OrderResourcesImpl implements OrderResources {
     public ResponseEntity<?> findOne(Integer id) {
         return null;
     }
+
+    @Override
+    public ResponseEntity<Order> findPage(Integer page, Integer linePerPage, String orderBy, String direction) {
+        return null;
+    }
 }

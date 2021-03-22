@@ -55,4 +55,9 @@ public class CityResourcesImpl implements CityResources {
     public ResponseEntity<?> findOne(Integer id) {
         return null;
     }
+
+    @Override
+    public ResponseEntity<City> findPage(Integer page, Integer linePerPage, String orderBy, String direction) {
+        return null;
+    }
 }
