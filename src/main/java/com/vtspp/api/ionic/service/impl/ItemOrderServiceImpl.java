@@ -1,7 +1,6 @@
 package com.vtspp.api.ionic.service.impl;
 
 import com.vtspp.api.ionic.domain.ItemOrder;
-import com.vtspp.api.ionic.dto.CategoryDTO;
 import com.vtspp.api.ionic.repositories.ItemOrderRepository;
 import com.vtspp.api.ionic.service.ItemOrderService;
 import com.vtspp.api.ionic.service.exceptions.item_order.*;
@@ -76,7 +75,7 @@ public class ItemOrderServiceImpl implements ItemOrderService {
     }
 
     @Override
-    public CategoryDTO findOne(Integer id) throws RuntimeException {
+    public ItemOrder findOne(Integer id) throws RuntimeException {
         return null;
     }
 }

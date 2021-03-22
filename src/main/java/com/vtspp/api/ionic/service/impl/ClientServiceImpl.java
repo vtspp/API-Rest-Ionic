@@ -1,7 +1,6 @@
 package com.vtspp.api.ionic.service.impl;
 
 import com.vtspp.api.ionic.domain.Client;
-import com.vtspp.api.ionic.dto.CategoryDTO;
 import com.vtspp.api.ionic.repositories.ClientRepository;
 import com.vtspp.api.ionic.service.ClientService;
 import com.vtspp.api.ionic.service.exceptions.client.*;
@@ -76,7 +75,7 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public CategoryDTO findOne(Integer id) throws RuntimeException {
+    public Client findOne(Integer id) throws RuntimeException {
         return null;
     }
 }

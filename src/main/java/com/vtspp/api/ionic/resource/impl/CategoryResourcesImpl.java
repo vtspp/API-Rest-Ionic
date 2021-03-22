@@ -54,7 +54,7 @@ public class CategoryResourcesImpl implements CategoryResources {
 
     @GetMapping("/{id}")
     @Override
-    public ResponseEntity<CategoryDTO> findOne(@PathVariable  Integer id) {
-        return ResponseEntity.ok(categoryService.findOne(id));
+    public ResponseEntity<?> findOne(@PathVariable  Integer id) {
+        return ResponseEntity.ok(new CategoryDTO(categoryService.findOne(id)));
     }
 }

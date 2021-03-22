@@ -1,7 +1,6 @@
 package com.vtspp.api.ionic.service.impl;
 
 import com.vtspp.api.ionic.domain.Telephone;
-import com.vtspp.api.ionic.dto.CategoryDTO;
 import com.vtspp.api.ionic.repositories.TelephoneRepository;
 import com.vtspp.api.ionic.service.TelephoneService;
 import com.vtspp.api.ionic.service.exceptions.telephone.*;
@@ -74,7 +73,7 @@ public class TelephoneServiceImpl implements TelephoneService {
     }
 
     @Override
-    public CategoryDTO findOne(Integer id) throws RuntimeException {
+    public Telephone findOne(Integer id) throws RuntimeException {
         return null;
     }
 }

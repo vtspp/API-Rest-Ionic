@@ -1,7 +1,6 @@
 package com.vtspp.api.ionic.resource.impl;
 
 import com.vtspp.api.ionic.domain.State;
-import com.vtspp.api.ionic.dto.CategoryDTO;
 import com.vtspp.api.ionic.resource.StateResources;
 import com.vtspp.api.ionic.service.impl.StateServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +52,7 @@ public class StateResourcesImpl implements StateResources {
     }
 
     @Override
-    public ResponseEntity<CategoryDTO> findOne(Integer id) {
+    public ResponseEntity<?> findOne(Integer id) {
         return null;
     }
 }

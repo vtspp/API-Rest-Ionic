@@ -1,7 +1,6 @@
 package com.vtspp.api.ionic.resource.impl;
 
 import com.vtspp.api.ionic.domain.Andress;
-import com.vtspp.api.ionic.dto.CategoryDTO;
 import com.vtspp.api.ionic.resource.AndressResources;
 import com.vtspp.api.ionic.service.impl.AndressServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +52,7 @@ public class AndressResourcesImpl implements AndressResources {
     }
 
     @Override
-    public ResponseEntity<CategoryDTO> findOne(Integer id) {
+    public ResponseEntity<?> findOne(Integer id) {
         return null;
     }
 }

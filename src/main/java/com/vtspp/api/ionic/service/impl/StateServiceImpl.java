@@ -1,7 +1,6 @@
 package com.vtspp.api.ionic.service.impl;
 
 import com.vtspp.api.ionic.domain.State;
-import com.vtspp.api.ionic.dto.CategoryDTO;
 import com.vtspp.api.ionic.repositories.StateRepository;
 import com.vtspp.api.ionic.service.StateService;
 import com.vtspp.api.ionic.service.exceptions.state.*;
@@ -74,7 +73,7 @@ public class StateServiceImpl implements StateService {
     }
 
     @Override
-    public CategoryDTO findOne(Integer id) throws RuntimeException {
+    public State findOne(Integer id) throws RuntimeException {
         return null;
     }
 }

@@ -1,7 +1,6 @@
 package com.vtspp.api.ionic.service.impl;
 
 import com.vtspp.api.ionic.domain.Product;
-import com.vtspp.api.ionic.dto.CategoryDTO;
 import com.vtspp.api.ionic.repositories.ProductRepository;
 import com.vtspp.api.ionic.service.ProductService;
 import com.vtspp.api.ionic.service.exceptions.product.ProductNotFoundException;
@@ -76,7 +75,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public CategoryDTO findOne(Integer id) throws RuntimeException {
+    public Product findOne(Integer id) throws RuntimeException {
         return null;
     }
 }

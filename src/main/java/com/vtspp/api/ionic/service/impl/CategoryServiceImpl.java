@@ -77,12 +77,12 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryDTO findOne(Integer id) throws RuntimeException {
+    public Category findOne(Integer id) throws RuntimeException {
 
         if(isNull(id))
             throw new IllegalArgumentException(utilMessageCategory.getMessageErrorFindOneCategory());
         try {
-            CategoryDTO category = new CategoryDTO(categoryRepository.getOne(id));
+            Category category = categoryRepository.getOne(id);
             return category;
         }
         catch (RuntimeException e) {
