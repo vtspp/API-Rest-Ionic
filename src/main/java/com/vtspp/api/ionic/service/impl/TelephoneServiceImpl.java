@@ -6,6 +6,7 @@ import com.vtspp.api.ionic.service.TelephoneService;
 import com.vtspp.api.ionic.service.exceptions.telephone.*;
 import com.vtspp.api.ionic.util.messages.exceptions.telephone.UtilMessageTelephone;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -74,6 +75,11 @@ public class TelephoneServiceImpl implements TelephoneService {
 
     @Override
     public Telephone findOne(Integer id) throws RuntimeException {
+        return null;
+    }
+
+    @Override
+    public Page<Telephone> findPage(Integer page, Integer linePerPage, String orderBy, String direction) {
         return null;
     }
 }

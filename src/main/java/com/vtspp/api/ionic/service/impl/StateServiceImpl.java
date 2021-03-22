@@ -6,6 +6,7 @@ import com.vtspp.api.ionic.service.StateService;
 import com.vtspp.api.ionic.service.exceptions.state.*;
 import com.vtspp.api.ionic.util.messages.exceptions.state.UtilMessageState;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -74,6 +75,11 @@ public class StateServiceImpl implements StateService {
 
     @Override
     public State findOne(Integer id) throws RuntimeException {
+        return null;
+    }
+
+    @Override
+    public Page<State> findPage(Integer page, Integer linePerPage, String orderBy, String direction) {
         return null;
     }
 }

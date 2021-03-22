@@ -6,6 +6,7 @@ import com.vtspp.api.ionic.service.OrderService;
 import com.vtspp.api.ionic.service.exceptions.order.*;
 import com.vtspp.api.ionic.util.messages.exceptions.order.UtilMessageOrder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -77,6 +78,11 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order findOne(Integer id) throws RuntimeException {
+        return null;
+    }
+
+    @Override
+    public Page<Order> findPage(Integer page, Integer linePerPage, String orderBy, String direction) {
         return null;
     }
 }

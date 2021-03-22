@@ -8,6 +8,7 @@ import com.vtspp.api.ionic.service.exceptions.product.ProductNotSaveException;
 import com.vtspp.api.ionic.service.exceptions.product.ProductRemoveException;
 import com.vtspp.api.ionic.util.messages.exceptions.product.UtilMessageProduct;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -76,6 +77,11 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product findOne(Integer id) throws RuntimeException {
+        return null;
+    }
+
+    @Override
+    public Page<Product> findPage(Integer page, Integer linePerPage, String orderBy, String direction) {
         return null;
     }
 }

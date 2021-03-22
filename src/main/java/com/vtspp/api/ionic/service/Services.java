@@ -1,5 +1,7 @@
 package com.vtspp.api.ionic.service;
 
+import org.springframework.data.domain.Page;
+
 import java.util.List;
 
 public interface Services<T> {
@@ -9,4 +11,5 @@ public interface Services<T> {
     List<T> findAll () throws RuntimeException;
     void update (T obj) throws RuntimeException;
     T findOne (Integer id) throws RuntimeException;
+    Page <T> findPage (Integer page, Integer linePerPage, String orderBy, String direction);
 }

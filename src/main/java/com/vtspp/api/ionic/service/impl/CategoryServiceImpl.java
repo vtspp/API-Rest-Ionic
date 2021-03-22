@@ -7,6 +7,7 @@ import com.vtspp.api.ionic.service.CategoryService;
 import com.vtspp.api.ionic.service.exceptions.category.*;
 import com.vtspp.api.ionic.util.messages.exceptions.category.UtilMessageCategory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -89,5 +90,10 @@ public class CategoryServiceImpl implements CategoryService {
             throw new CategoryNotFoundException(utilMessageCategory.getMessageErrorFindOneCategory());
         }
 
+    }
+
+    @Override
+    public Page<Category> findPage(Integer page, Integer linePerPage, String orderBy, String direction) {
+        return null;
     }
 }

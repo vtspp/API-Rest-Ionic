@@ -6,6 +6,7 @@ import com.vtspp.api.ionic.service.ItemOrderService;
 import com.vtspp.api.ionic.service.exceptions.item_order.*;
 import com.vtspp.api.ionic.util.messages.exceptions.item_order.UtilMessageItemOrder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -76,6 +77,11 @@ public class ItemOrderServiceImpl implements ItemOrderService {
 
     @Override
     public ItemOrder findOne(Integer id) throws RuntimeException {
+        return null;
+    }
+
+    @Override
+    public Page<ItemOrder> findPage(Integer page, Integer linePerPage, String orderBy, String direction) {
         return null;
     }
 }

@@ -6,6 +6,7 @@ import com.vtspp.api.ionic.service.AndressService;
 import com.vtspp.api.ionic.service.exceptions.andress.*;
 import com.vtspp.api.ionic.util.messages.exceptions.andress.UtilMessageAndress;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -80,6 +81,11 @@ public class AndressServiceImpl implements AndressService {
 
     @Override
     public Andress findOne(Integer id) throws RuntimeException {
+        return null;
+    }
+
+    @Override
+    public Page<Andress> findPage(Integer page, Integer linePerPage, String orderBy, String direction) {
         return null;
     }
 }

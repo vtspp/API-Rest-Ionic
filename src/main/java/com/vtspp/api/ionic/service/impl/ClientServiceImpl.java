@@ -6,6 +6,7 @@ import com.vtspp.api.ionic.service.ClientService;
 import com.vtspp.api.ionic.service.exceptions.client.*;
 import com.vtspp.api.ionic.util.messages.exceptions.client.UtilMessageClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -76,6 +77,11 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public Client findOne(Integer id) throws RuntimeException {
+        return null;
+    }
+
+    @Override
+    public Page<Client> findPage(Integer page, Integer linePerPage, String orderBy, String direction) {
         return null;
     }
 }
