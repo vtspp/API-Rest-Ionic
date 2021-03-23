@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.vtspp.api.ionic.util.Check.isNull;
+
 @Service
 public class ClientServiceImpl implements ClientService {
 
@@ -79,7 +81,15 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public Client findOne(Integer id) throws RuntimeException {
-        return null;
+        if(isNull(id))
+            throw new IllegalArgumentException(utilMessageClient.getMessageErrorFindOneClient());
+        try {
+            Client client = clientRepository.getOne(id);
+            return client;
+        }
+        catch (RuntimeException e) {
+            throw new ClientNotFoundException(utilMessageClient.getMessageErrorFindOneClient());
+        }
     }
 
     @Override
