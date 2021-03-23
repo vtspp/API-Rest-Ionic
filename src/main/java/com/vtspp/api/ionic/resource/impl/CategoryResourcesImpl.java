@@ -3,6 +3,7 @@ package com.vtspp.api.ionic.resource.impl;
 import com.vtspp.api.ionic.domain.Category;
 import com.vtspp.api.ionic.dto.CategoryDTO;
 import com.vtspp.api.ionic.resource.CategoryResources;
+import com.vtspp.api.ionic.service.exceptions.category.CategoryNotFoundException;
 import com.vtspp.api.ionic.service.impl.CategoryServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.persistence.EntityNotFoundException;
 import java.net.URI;
 import java.util.List;
 
@@ -51,7 +53,12 @@ public class CategoryResourcesImpl implements CategoryResources {
 
     @Override
     public ResponseEntity<?> findOne(Integer id) {
-        return ResponseEntity.ok(new CategoryDTO(categoryService.findOne(id)));
+        try {
+            return ResponseEntity.ok(new CategoryDTO(categoryService.findOne(id)));
+        }
+        catch (EntityNotFoundException e) {
+            throw new CategoryNotFoundException(categoryService.getUtilMessageCategory().getMessageErrorFindOneCategory());
+        }
     }
 
     @Override

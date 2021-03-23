@@ -80,22 +80,17 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Category findOne(Integer id) throws RuntimeException {
-
-        if(isNull(id))
-            throw new IllegalArgumentException(utilMessageCategory.getMessageErrorFindOneCategory());
-        try {
-            Category category = categoryRepository.getOne(id);
-            return category;
-        }
-        catch (RuntimeException e) {
-            throw new CategoryNotFoundException(utilMessageCategory.getMessageErrorFindOneCategory());
-        }
-
+        if(isNull(id)) throw new IllegalArgumentException(utilMessageCategory.getMessageErrorFindOneCategory());
+            return categoryRepository.getOne(id);
     }
 
     @Override
     public Page<Category> findPage(Integer page, Integer linePerPage, String direction, String orderBy) {
         PageRequest pageRequest = PageRequest.of(page, linePerPage, Sort.Direction.valueOf(direction), orderBy);
         return categoryRepository.findAll(pageRequest);
+    }
+
+    public final UtilMessageCategory getUtilMessageCategory() {
+        return utilMessageCategory;
     }
 }
