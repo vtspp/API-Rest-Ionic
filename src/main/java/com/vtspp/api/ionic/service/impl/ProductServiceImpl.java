@@ -9,6 +9,8 @@ import com.vtspp.api.ionic.service.exceptions.product.ProductRemoveException;
 import com.vtspp.api.ionic.util.messages.exceptions.product.UtilMessageProduct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -82,6 +84,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Page<Product> findPage(Integer page, Integer linePerPage, String direction, String orderBy) {
-        return null;
+        PageRequest pageRequest = PageRequest.of(page, linePerPage, Sort.Direction.valueOf(direction), orderBy);
+        return productRepository.findAll(pageRequest);
     }
 }
