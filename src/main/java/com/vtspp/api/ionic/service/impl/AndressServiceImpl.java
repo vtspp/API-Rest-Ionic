@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.vtspp.api.ionic.util.Check.isNull;
+
 @Service
 public class AndressServiceImpl implements AndressService {
 
@@ -83,12 +85,17 @@ public class AndressServiceImpl implements AndressService {
 
     @Override
     public Andress findOne(Integer id) throws RuntimeException {
-        return null;
+        if(isNull(id)) throw new IllegalArgumentException(utilMessageAndress.getMessageErrorFindOneAndress());
+        return andressRepository.getOne(id);
     }
 
     @Override
     public Page<Andress> findPage(Integer page, Integer linePerPage, String direction, String orderBy) {
         PageRequest pageRequest = PageRequest.of(page, linePerPage, Sort.Direction.valueOf(direction), orderBy);
         return andressRepository.findAll(pageRequest);
+    }
+
+    public final UtilMessageAndress getUtilMessageAndress() {
+        return utilMessageAndress;
     }
 }

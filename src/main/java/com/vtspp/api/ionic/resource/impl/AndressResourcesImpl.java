@@ -2,6 +2,7 @@ package com.vtspp.api.ionic.resource.impl;
 
 import com.vtspp.api.ionic.domain.Andress;
 import com.vtspp.api.ionic.resource.AndressResources;
+import com.vtspp.api.ionic.service.exceptions.andress.AndressNotFoundException;
 import com.vtspp.api.ionic.service.impl.AndressServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.persistence.EntityNotFoundException;
 import java.net.URI;
 import java.util.List;
 
@@ -50,7 +52,12 @@ public class AndressResourcesImpl implements AndressResources {
 
     @Override
     public ResponseEntity<?> findOne(Integer id) {
-        return null;
+        try {
+            return ResponseEntity.ok(andressService.findOne(id));
+        }
+        catch (EntityNotFoundException e) {
+            throw new AndressNotFoundException(andressService.getUtilMessageAndress().getMessageErrorFindOneAndress());
+        }
     }
 
     @Override

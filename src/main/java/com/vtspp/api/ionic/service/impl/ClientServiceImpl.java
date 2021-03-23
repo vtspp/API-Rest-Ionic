@@ -81,9 +81,8 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Client findOne(Integer id) throws IllegalArgumentException, EntityNotFoundException {
-        if(isNull(id))
-            throw new IllegalArgumentException(utilMessageClient.getMessageErrorFindOneClient());
+    public Client findOne(Integer id) throws IllegalArgumentException {
+        if(isNull(id)) throw new IllegalArgumentException(utilMessageClient.getMessageErrorFindOneClient());
             return clientRepository.getOne(id);
     }
 
