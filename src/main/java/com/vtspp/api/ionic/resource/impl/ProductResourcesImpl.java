@@ -4,6 +4,7 @@ import com.vtspp.api.ionic.domain.Product;
 import com.vtspp.api.ionic.resource.ProductResources;
 import com.vtspp.api.ionic.service.impl.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -58,7 +59,8 @@ public class ProductResourcesImpl implements ProductResources {
 
     @Override
     public ResponseEntity<?> findPage(Integer page, Integer linePerPage, String direction, String orderBy) {
-        return null;
+        Page<Product> productList = productService.findPage(page, linePerPage, direction, orderBy);
+        return ResponseEntity.ok(productList);
     }
 
 
