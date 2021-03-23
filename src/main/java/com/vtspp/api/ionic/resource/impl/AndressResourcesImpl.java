@@ -1,6 +1,7 @@
 package com.vtspp.api.ionic.resource.impl;
 
 import com.vtspp.api.ionic.domain.Andress;
+import com.vtspp.api.ionic.dto.AndressDTO;
 import com.vtspp.api.ionic.resource.AndressResources;
 import com.vtspp.api.ionic.service.exceptions.andress.AndressNotFoundException;
 import com.vtspp.api.ionic.service.impl.AndressServiceImpl;
@@ -53,7 +54,7 @@ public class AndressResourcesImpl implements AndressResources {
     @Override
     public ResponseEntity<?> findOne(Integer id) {
         try {
-            return ResponseEntity.ok(andressService.findOne(id));
+            return ResponseEntity.ok(new AndressDTO(andressService.findOne(id)));
         }
         catch (EntityNotFoundException e) {
             throw new AndressNotFoundException(andressService.getUtilMessageAndress().getMessageErrorFindOneAndress());
