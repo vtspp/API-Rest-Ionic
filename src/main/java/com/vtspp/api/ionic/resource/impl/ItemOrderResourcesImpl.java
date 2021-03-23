@@ -4,6 +4,7 @@ import com.vtspp.api.ionic.domain.ItemOrder;
 import com.vtspp.api.ionic.resource.ItemOrderResources;
 import com.vtspp.api.ionic.service.impl.ItemOrderServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -54,7 +55,8 @@ public class ItemOrderResourcesImpl implements ItemOrderResources {
 
     @Override
     public ResponseEntity<?> findPage(Integer page, Integer linePerPage, String direction, String orderBy) {
-        return null;
+        Page<ItemOrder> itemOrderList = itemOrderService.findPage(page, linePerPage, direction, orderBy);
+        return ResponseEntity.ok(itemOrderList);
     }
 
 
