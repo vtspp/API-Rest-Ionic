@@ -7,6 +7,8 @@ import com.vtspp.api.ionic.service.exceptions.item_order.*;
 import com.vtspp.api.ionic.util.messages.exceptions.item_order.UtilMessageItemOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -82,7 +84,8 @@ public class ItemOrderServiceImpl implements ItemOrderService {
 
     @Override
     public Page<ItemOrder> findPage(Integer page, Integer linePerPage, String direction, String orderBy) {
-        return null;
+        PageRequest pageRequest = PageRequest.of(page, linePerPage, Sort.Direction.valueOf(direction), orderBy);
+        return itemOrderRepository.findAll(pageRequest);
     }
 
 
