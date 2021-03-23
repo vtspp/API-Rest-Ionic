@@ -4,6 +4,7 @@ import com.vtspp.api.ionic.domain.Telephone;
 import com.vtspp.api.ionic.resource.TelephoneResources;
 import com.vtspp.api.ionic.service.impl.TelephoneServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -54,7 +55,8 @@ public class TelephoneResourcesImpl implements TelephoneResources {
 
     @Override
     public ResponseEntity<?> findPage(Integer page, Integer linePerPage, String direction, String orderBy) {
-        return null;
+        Page<Telephone> telephoneList = telephoneService.findPage(page, linePerPage, direction, orderBy);
+        return ResponseEntity.ok(telephoneList);
     }
 
 
