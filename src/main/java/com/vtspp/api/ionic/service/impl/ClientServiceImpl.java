@@ -87,6 +87,4 @@ public class ClientServiceImpl implements ClientService {
         PageRequest pageRequest = PageRequest.of(page, linePerPage, Sort.Direction.valueOf(direction), orderBy);
         return clientRepository.findAll(pageRequest);
     }
-
-
 }

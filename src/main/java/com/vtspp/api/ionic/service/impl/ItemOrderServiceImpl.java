@@ -87,6 +87,4 @@ public class ItemOrderServiceImpl implements ItemOrderService {
         PageRequest pageRequest = PageRequest.of(page, linePerPage, Sort.Direction.valueOf(direction), orderBy);
         return itemOrderRepository.findAll(pageRequest);
     }
-
-
 }

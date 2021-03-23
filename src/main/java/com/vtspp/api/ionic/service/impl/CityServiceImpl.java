@@ -85,6 +85,4 @@ public class CityServiceImpl implements CityService {
         PageRequest pageRequest = PageRequest.of(page, linePerPage, Sort.Direction.valueOf(direction), orderBy);
         return cityRepository.findAll(pageRequest);
     }
-
-
 }

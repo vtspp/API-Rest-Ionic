@@ -84,6 +84,4 @@ public class ProductServiceImpl implements ProductService {
     public Page<Product> findPage(Integer page, Integer linePerPage, String direction, String orderBy) {
         return null;
     }
-
-
 }

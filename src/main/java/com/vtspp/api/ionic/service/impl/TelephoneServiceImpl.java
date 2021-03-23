@@ -82,6 +82,4 @@ public class TelephoneServiceImpl implements TelephoneService {
     public Page<Telephone> findPage(Integer page, Integer linePerPage, String direction, String orderBy) {
         return null;
     }
-
-
 }
