@@ -3,13 +3,17 @@ package com.vtspp.api.ionic.resource.impl;
 import com.vtspp.api.ionic.domain.Client;
 import com.vtspp.api.ionic.dto.ClientDTO;
 import com.vtspp.api.ionic.resource.ClientResources;
+import com.vtspp.api.ionic.service.exceptions.client.ClientNotFoundException;
 import com.vtspp.api.ionic.service.impl.ClientServiceImpl;
+import com.vtspp.api.ionic.util.messages.exceptions.client.UtilMessageClient;
+import org.apache.logging.log4j.CloseableThreadContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.persistence.EntityNotFoundException;
 import java.net.URI;
 import java.util.List;
 
@@ -51,7 +55,12 @@ public class ClientResourcesImpl implements ClientResources {
 
     @Override
     public ResponseEntity<?> findOne(Integer id) {
-        return ResponseEntity.ok(new ClientDTO(clientService.findOne(id)));
+        try {
+            return ResponseEntity.ok(new ClientDTO(clientService.findOne(id)));
+        }
+        catch (EntityNotFoundException e) {
+            throw new ClientNotFoundException(clientService.getUtilMessageClient().getMessageErrorFindOneClient());
+        }
     }
 
     @Override

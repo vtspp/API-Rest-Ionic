@@ -11,6 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 import static com.vtspp.api.ionic.util.Check.isNull;
@@ -80,21 +81,19 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Client findOne(Integer id) throws RuntimeException {
+    public Client findOne(Integer id) throws IllegalArgumentException, EntityNotFoundException {
         if(isNull(id))
             throw new IllegalArgumentException(utilMessageClient.getMessageErrorFindOneClient());
-        try {
-            Client client = clientRepository.getOne(id);
-            return client;
-        }
-        catch (RuntimeException e) {
-            throw new ClientNotFoundException(utilMessageClient.getMessageErrorFindOneClient());
-        }
+            return clientRepository.getOne(id);
     }
 
     @Override
     public Page<Client> findPage(Integer page, Integer linePerPage, String direction, String orderBy) {
         PageRequest pageRequest = PageRequest.of(page, linePerPage, Sort.Direction.valueOf(direction), orderBy);
         return clientRepository.findAll(pageRequest);
+    }
+
+    public final UtilMessageClient getUtilMessageClient() {
+        return utilMessageClient;
     }
 }
