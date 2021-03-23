@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.vtspp.api.ionic.util.Check.isNull;
+
 @Service
 public class CityServiceImpl implements CityService {
 
@@ -77,12 +79,17 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public City findOne(Integer id) throws RuntimeException {
-        return null;
+        if(isNull(id)) throw new IllegalArgumentException(utilMessageCity.getMessageErrorFindOneCity());
+        return cityRepository.getOne(id);
     }
 
     @Override
     public Page<City> findPage(Integer page, Integer linePerPage, String direction, String orderBy) {
         PageRequest pageRequest = PageRequest.of(page, linePerPage, Sort.Direction.valueOf(direction), orderBy);
         return cityRepository.findAll(pageRequest);
+    }
+
+    public final UtilMessageCity getUtilMessageCity() {
+        return utilMessageCity;
     }
 }
