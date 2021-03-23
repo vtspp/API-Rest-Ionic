@@ -1,7 +1,5 @@
 package com.vtspp.api.ionic.domain;
 
-import com.vtspp.api.ionic.enums.StatusPayment;
-
 import javax.persistence.Entity;
 
 @Entity(name = "tb_payment_card")
