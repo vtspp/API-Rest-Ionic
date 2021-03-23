@@ -7,6 +7,8 @@ import com.vtspp.api.ionic.service.exceptions.client.*;
 import com.vtspp.api.ionic.util.messages.exceptions.client.UtilMessageClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -82,7 +84,8 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public Page<Client> findPage(Integer page, Integer linePerPage, String direction, String orderBy) {
-        return null;
+        PageRequest pageRequest = PageRequest.of(page, linePerPage, Sort.Direction.valueOf(direction), orderBy);
+        return clientRepository.findAll(pageRequest);
     }
 
 
