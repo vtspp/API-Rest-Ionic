@@ -82,7 +82,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Page<Order> findPage(Integer page, Integer linePerPage, String orderBy, String direction) {
+    public Page<Order> findPage(Integer page, Integer linePerPage, String direction, String orderBy) {
         return null;
     }
+
+
 }

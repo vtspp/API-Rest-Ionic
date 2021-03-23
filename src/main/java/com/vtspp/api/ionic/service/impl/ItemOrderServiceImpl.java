@@ -81,7 +81,9 @@ public class ItemOrderServiceImpl implements ItemOrderService {
     }
 
     @Override
-    public Page<ItemOrder> findPage(Integer page, Integer linePerPage, String orderBy, String direction) {
+    public Page<ItemOrder> findPage(Integer page, Integer linePerPage, String direction, String orderBy) {
         return null;
     }
+
+
 }

@@ -11,5 +11,5 @@ public interface Services<T> {
     List<T> findAll () throws RuntimeException;
     void update (T obj) throws RuntimeException;
     T findOne (Integer id) throws RuntimeException;
-    Page <T> findPage (Integer page, Integer linePerPage, String orderBy, String direction);
+    Page <T> findPage (Integer page, Integer linePerPage, String direction, String orderBy);
 }

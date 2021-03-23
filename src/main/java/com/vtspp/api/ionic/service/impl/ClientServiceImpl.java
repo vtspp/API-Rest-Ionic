@@ -81,7 +81,9 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Page<Client> findPage(Integer page, Integer linePerPage, String orderBy, String direction) {
+    public Page<Client> findPage(Integer page, Integer linePerPage, String direction, String orderBy) {
         return null;
     }
+
+
 }

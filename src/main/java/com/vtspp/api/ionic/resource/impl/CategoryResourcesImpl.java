@@ -56,7 +56,7 @@ public class CategoryResourcesImpl implements CategoryResources {
 
     @Override
     public ResponseEntity<Page<Category>> findPage( Integer page, Integer linePerPage, String direction, String orderBy) {
-        Page<Category> list = categoryService.findPage(page, linePerPage, direction, orderBy);
-        return ResponseEntity.ok(list);
+        Page<Category> categoryList = categoryService.findPage(page, linePerPage, direction, orderBy);
+        return ResponseEntity.ok(categoryList);
     }
 }

@@ -79,7 +79,9 @@ public class TelephoneServiceImpl implements TelephoneService {
     }
 
     @Override
-    public Page<Telephone> findPage(Integer page, Integer linePerPage, String orderBy, String direction) {
+    public Page<Telephone> findPage(Integer page, Integer linePerPage, String direction, String orderBy) {
         return null;
     }
+
+
 }

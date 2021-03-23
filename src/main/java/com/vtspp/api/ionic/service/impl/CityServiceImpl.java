@@ -79,7 +79,9 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
-    public Page<City> findPage(Integer page, Integer linePerPage, String orderBy, String direction) {
+    public Page<City> findPage(Integer page, Integer linePerPage, String direction, String orderBy) {
         return null;
     }
+
+
 }

@@ -81,7 +81,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Page<Product> findPage(Integer page, Integer linePerPage, String orderBy, String direction) {
+    public Page<Product> findPage(Integer page, Integer linePerPage, String direction, String orderBy) {
         return null;
     }
+
+
 }
