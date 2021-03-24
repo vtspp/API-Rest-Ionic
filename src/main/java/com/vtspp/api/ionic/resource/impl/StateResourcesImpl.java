@@ -1,7 +1,9 @@
 package com.vtspp.api.ionic.resource.impl;
 
 import com.vtspp.api.ionic.domain.State;
+import com.vtspp.api.ionic.dto.StateDTO;
 import com.vtspp.api.ionic.resource.StateResources;
+import com.vtspp.api.ionic.service.exceptions.state.StateNotFoundException;
 import com.vtspp.api.ionic.service.impl.StateServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.persistence.EntityNotFoundException;
 import java.net.URI;
 import java.util.List;
 
@@ -50,7 +53,12 @@ public class StateResourcesImpl implements StateResources {
 
     @Override
     public ResponseEntity<?> findOne(Integer id) {
-        return null;
+        try {
+            return ResponseEntity.ok(new StateDTO(stateService.findOne(id)));
+        }
+        catch (EntityNotFoundException e) {
+            throw new StateNotFoundException(stateService.getUtilMessageState().getMessageErrorFindOneState());
+        }
     }
 
     @Override
