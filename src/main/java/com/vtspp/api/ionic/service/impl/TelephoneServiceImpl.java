@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.vtspp.api.ionic.util.Check.isNull;
+
 @Service
 public class TelephoneServiceImpl implements TelephoneService {
 
@@ -77,12 +79,17 @@ public class TelephoneServiceImpl implements TelephoneService {
 
     @Override
     public Telephone findOne(Integer id) throws RuntimeException {
-        return null;
+        if(isNull(id)) throw new IllegalArgumentException(utilMessageTelephone.getMessageErrorFindOneTelephone());
+        return telephoneRepository.getOne(id);
     }
 
     @Override
     public Page<Telephone> findPage(Integer page, Integer linePerPage, String direction, String orderBy) {
         PageRequest pageRequest = PageRequest.of(page, linePerPage, Sort.Direction.valueOf(direction), orderBy);
         return telephoneRepository.findAll(pageRequest);
+    }
+
+    public final UtilMessageTelephone getUtilMessageTelephone() {
+        return utilMessageTelephone;
     }
 }

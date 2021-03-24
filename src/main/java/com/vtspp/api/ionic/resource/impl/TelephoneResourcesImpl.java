@@ -1,7 +1,9 @@
 package com.vtspp.api.ionic.resource.impl;
 
 import com.vtspp.api.ionic.domain.Telephone;
+import com.vtspp.api.ionic.dto.TelephoneDTO;
 import com.vtspp.api.ionic.resource.TelephoneResources;
+import com.vtspp.api.ionic.service.exceptions.telephone.TelephoneNotFoundException;
 import com.vtspp.api.ionic.service.impl.TelephoneServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.persistence.EntityNotFoundException;
 import java.net.URI;
 import java.util.List;
 
@@ -50,7 +53,12 @@ public class TelephoneResourcesImpl implements TelephoneResources {
 
     @Override
     public ResponseEntity<?> findOne(Integer id) {
-        return null;
+        try {
+            return ResponseEntity.ok(new TelephoneDTO(telephoneService.findOne(id)));
+        }
+        catch (EntityNotFoundException e) {
+            throw new TelephoneNotFoundException(telephoneService.getUtilMessageTelephone().getMessageErrorFindOneTelephone());
+        }
     }
 
     @Override
