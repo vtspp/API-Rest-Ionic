@@ -1,5 +1,9 @@
 package com.vtspp.api.ionic.util;
 
+import com.vtspp.api.ionic.domain.ItemOrderPK;
+import com.vtspp.api.ionic.domain.Order;
+import com.vtspp.api.ionic.domain.Product;
+
 import static com.vtspp.api.ionic.util.Check.isNull;
 
 public class Converter {
@@ -26,6 +30,13 @@ public class Converter {
             if (elements[i].equals(elements[code])) return elements[code];
         }
         throw new IllegalArgumentException(String.format("Id %d inválida.", code));
+    }
+
+    public static ItemOrderPK toItemOrderPK (Integer value) {
+        ItemOrderPK itemOrderPK = new ItemOrderPK();
+        itemOrderPK.setProduct(new Product(value, null, null,null));
+        itemOrderPK.setOrder(new Order(value,null, null, null, null));
+        return itemOrderPK;
     }
 
 }

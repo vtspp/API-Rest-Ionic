@@ -6,5 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ItemOrderRepository extends Repositories<ItemOrder, ItemOrderPK> {
-    void deleteById(Integer id);
 }

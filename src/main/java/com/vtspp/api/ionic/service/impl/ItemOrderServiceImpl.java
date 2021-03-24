@@ -13,6 +13,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.vtspp.api.ionic.util.Check.isNull;
+import static com.vtspp.api.ionic.util.Converter.toItemOrderPK;
+
 @Service
 public class ItemOrderServiceImpl implements ItemOrderService {
 
@@ -39,7 +42,7 @@ public class ItemOrderServiceImpl implements ItemOrderService {
     @Override
     public void remove(Integer id) throws ItemOrderRemoveException {
         try {
-            itemOrderRepository.deleteById(id);
+            itemOrderRepository.deleteById(toItemOrderPK(id));
         }
         catch (RuntimeException e) {
             throw new ItemOrderRemoveException(utilMessageItemOrder.getMessageErrorRemoveItemOrder());
@@ -79,12 +82,17 @@ public class ItemOrderServiceImpl implements ItemOrderService {
 
     @Override
     public ItemOrder findOne(Integer id) throws RuntimeException {
-        return null;
+        if(isNull(id)) throw new IllegalArgumentException(utilMessageItemOrder.getMessageErrorFindOneItemOrder());
+        return itemOrderRepository.getOne(toItemOrderPK(id));
     }
 
     @Override
     public Page<ItemOrder> findPage(Integer page, Integer linePerPage, String direction, String orderBy) {
         PageRequest pageRequest = PageRequest.of(page, linePerPage, Sort.Direction.valueOf(direction), orderBy);
         return itemOrderRepository.findAll(pageRequest);
+    }
+
+    public final UtilMessageItemOrder getUtilMessageItemOrder() {
+        return utilMessageItemOrder;
     }
 }

@@ -2,6 +2,7 @@ package com.vtspp.api.ionic.resource.impl;
 
 import com.vtspp.api.ionic.domain.ItemOrder;
 import com.vtspp.api.ionic.resource.ItemOrderResources;
+import com.vtspp.api.ionic.service.exceptions.item_order.ItemOrderNotFoundException;
 import com.vtspp.api.ionic.service.impl.ItemOrderServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.persistence.EntityNotFoundException;
 import java.net.URI;
 import java.util.List;
 
@@ -50,7 +52,12 @@ public class ItemOrderResourcesImpl implements ItemOrderResources {
 
     @Override
     public ResponseEntity<?> findOne(Integer id) {
-        return null;
+        try {
+            return ResponseEntity.ok(itemOrderService.findOne(id));
+        }
+        catch (EntityNotFoundException e) {
+            throw new ItemOrderNotFoundException(itemOrderService.getUtilMessageItemOrder().getMessageErrorFindOneItemOrder());
+        }
     }
 
     @Override
