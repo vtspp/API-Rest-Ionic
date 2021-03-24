@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.vtspp.api.ionic.util.Check.isNull;
+
 @Service
 public class OrderServiceImpl implements OrderService {
 
@@ -80,12 +82,17 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order findOne(Integer id) throws RuntimeException {
-        return null;
+        if(isNull(id)) throw new IllegalArgumentException(utilMessageOrder.getMessageErrorFindOneOrder());
+        return orderRepository.getOne(id);
     }
 
     @Override
     public Page<Order> findPage(Integer page, Integer linePerPage, String direction, String orderBy) {
         PageRequest pageRequest = PageRequest.of(page, linePerPage, Sort.Direction.valueOf(direction), orderBy);
         return orderRepository.findAll(pageRequest);
+    }
+
+    public final UtilMessageOrder getUtilMessageOrder() {
+        return utilMessageOrder;
     }
 }
