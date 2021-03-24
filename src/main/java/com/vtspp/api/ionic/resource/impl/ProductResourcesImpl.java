@@ -1,7 +1,9 @@
 package com.vtspp.api.ionic.resource.impl;
 
 import com.vtspp.api.ionic.domain.Product;
+import com.vtspp.api.ionic.dto.ProductDTO;
 import com.vtspp.api.ionic.resource.ProductResources;
+import com.vtspp.api.ionic.service.exceptions.product.ProductNotFoundException;
 import com.vtspp.api.ionic.service.impl.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.persistence.EntityNotFoundException;
 import java.net.URI;
 import java.util.List;
 
@@ -54,7 +57,12 @@ public class ProductResourcesImpl implements ProductResources {
 
     @Override
     public ResponseEntity<?> findOne(Integer id) {
-        return null;
+        try {
+            return ResponseEntity.ok(new ProductDTO(productService.findOne(id)));
+        }
+        catch (EntityNotFoundException e) {
+            throw new ProductNotFoundException(productService.getUtilMessageProduct().getMessageErrorFindOneProduct());
+        }
     }
 
     @Override
