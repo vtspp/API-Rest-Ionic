@@ -1,6 +1,7 @@
 package com.vtspp.api.ionic.resource.impl;
 
 import com.vtspp.api.ionic.domain.ItemOrder;
+import com.vtspp.api.ionic.dto.ItemOrderDTO;
 import com.vtspp.api.ionic.resource.ItemOrderResources;
 import com.vtspp.api.ionic.service.exceptions.item_order.ItemOrderNotFoundException;
 import com.vtspp.api.ionic.service.impl.ItemOrderServiceImpl;
@@ -53,7 +54,7 @@ public class ItemOrderResourcesImpl implements ItemOrderResources {
     @Override
     public ResponseEntity<?> findOne(Integer id) {
         try {
-            return ResponseEntity.ok(itemOrderService.findOne(id));
+            return ResponseEntity.ok(new ItemOrderDTO(itemOrderService.findOne(id)));
         }
         catch (EntityNotFoundException e) {
             throw new ItemOrderNotFoundException(itemOrderService.getUtilMessageItemOrder().getMessageErrorFindOneItemOrder());
