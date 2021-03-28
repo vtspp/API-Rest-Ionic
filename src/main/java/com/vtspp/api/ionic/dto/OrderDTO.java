@@ -8,6 +8,7 @@ import com.vtspp.api.ionic.domain.Telephone;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class OrderDTO implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -107,8 +108,8 @@ public class OrderDTO implements Serializable {
         return statusPayment;
     }
 
-    public List<ItemOrder> getItens() {
-        return itens;
+    public List<List<ItemOrder>> getItens() {
+        return itens.stream().map(x -> itens).collect(Collectors.toList());
     }
 
     @Override
