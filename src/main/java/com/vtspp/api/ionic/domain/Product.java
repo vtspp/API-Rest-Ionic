@@ -3,6 +3,8 @@ package com.vtspp.api.ionic.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,7 +18,11 @@ public class Product implements Serializable {
      @Id
      @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @NotEmpty(message = "Escolha um produto")
     private String name;
+
+    @NotNull(message = "Informe o preço")
     private Double price;
 
     @ManyToOne

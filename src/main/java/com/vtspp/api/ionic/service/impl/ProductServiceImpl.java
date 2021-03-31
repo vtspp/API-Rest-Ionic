@@ -68,6 +68,7 @@ public class ProductServiceImpl implements ProductService {
             product.setName(obj.getName());
             product.setPrice(obj.getPrice());
             product.setCategory(obj.getCategory());
+            product.getItens().addAll(obj.getItens());
         }
         catch (RuntimeException e) {
             throw new ProductNotFoundException(utilMessageProduct.getMessageErrorFindOneProduct());

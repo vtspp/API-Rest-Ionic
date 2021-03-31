@@ -1,4 +1,4 @@
-package com.vtspp.api.ionic.util.messages.config;
+package com.vtspp.api.ionic.util.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;

@@ -6,12 +6,14 @@ import com.vtspp.api.ionic.enums.StatusPayment;
 import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 
 @Entity(name = "tb_payment_with_boleto")
 public class PaymentWithBoleto extends Payment{
 
      @JsonFormat(pattern="dd/MM/yyyy")
+     @NotEmpty(message = "Informe a data para vencimento")
      private LocalDate dueDate;
 
      @JsonFormat(pattern="dd/MM/yyyy")

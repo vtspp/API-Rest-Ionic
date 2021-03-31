@@ -64,6 +64,7 @@ public class TelephoneServiceImpl implements TelephoneService {
         try {
             telephone = telephoneRepository.getOne(obj.getId());
             telephone.setNumber(obj.getNumber());
+            telephone.setClient(obj.getClient());
         }
         catch (RuntimeException e) {
             throw new TelephoneNotFoundException(utilMessageTelephone.getMessageErrorFindOneTelephone());

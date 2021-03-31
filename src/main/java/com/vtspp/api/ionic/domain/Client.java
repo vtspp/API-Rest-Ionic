@@ -3,8 +3,13 @@ package com.vtspp.api.ionic.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vtspp.api.ionic.enums.TypeClient;
 import com.vtspp.api.ionic.util.Converter;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.*;
 
@@ -15,8 +20,15 @@ public class Client implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @NotEmpty(message = "O campo nome não deve ser vazio")
+    @Length(min = 2, max = 60, message = "O nome deve ter entre 2 à 60 caracteres")
     private String name;
+
+    @Email(message = "Este email não é valido")
+    @NotEmpty(message = "O campo email não deve ser vazio")
     private String email;
+
     private String cfpOuCnpj;
 
     @JoinColumn(name = "type_client_id")

@@ -64,6 +64,7 @@ public class CityServiceImpl implements CityService {
         try {
             city = cityRepository.getOne(obj.getId());
             city.setName(obj.getName());
+            city.setState(obj.getState());
         }
         catch (RuntimeException e) {
             throw new CityNotFoundException(utilMessageCity.getMessageErrorFindOneCity());

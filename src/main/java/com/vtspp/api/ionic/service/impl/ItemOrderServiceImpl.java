@@ -67,6 +67,8 @@ public class ItemOrderServiceImpl implements ItemOrderService {
             itemOrder.setDiscount(obj.getDiscount());
             itemOrder.setQuantity(obj.getQuantity());
             itemOrder.setPrice(obj.getPrice());
+            itemOrder.getId().setOrder(obj.getOrder());
+            itemOrder.getId().setProduct(obj.getProduct());
         }
         catch (RuntimeException e) {
             throw new ItemOrderNotFoundException(utilMessageItemOrder.getMessageErrorFindOneItemOrder());

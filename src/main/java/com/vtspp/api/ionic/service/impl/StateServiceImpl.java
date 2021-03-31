@@ -64,6 +64,7 @@ public class StateServiceImpl implements StateService {
         try {
             state = stateRepository.getOne(obj.getId());
             state.setName(obj.getName());
+            state.getCities().addAll(obj.getCities());
         }
         catch (RuntimeException e) {
             throw new StateNotFoundException(utilMessageState.getMessageErrorFindOneState());

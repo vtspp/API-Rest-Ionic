@@ -1,10 +1,12 @@
 package com.vtspp.api.ionic.domain;
 
 import javax.persistence.Entity;
+import javax.validation.constraints.NotEmpty;
 
 @Entity(name = "tb_payment_card")
 public class PaymentCard extends Payment{
 
+    @NotEmpty(message = "Informe o número de parcelas")
     private Integer numberOfInstallments;
 
     public PaymentCard() {

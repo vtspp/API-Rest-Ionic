@@ -1,6 +1,7 @@
 package com.vtspp.api.ionic.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -11,6 +12,8 @@ public class Category implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @NotEmpty(message = "Informe a categoria")
     private String name;
 
     @ManyToOne

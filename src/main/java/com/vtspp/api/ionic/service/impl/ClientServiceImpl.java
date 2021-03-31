@@ -11,7 +11,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 import static com.vtspp.api.ionic.util.Check.isNull;
@@ -67,6 +66,10 @@ public class ClientServiceImpl implements ClientService {
             client.setName(obj.getName());
             client.setEmail(obj.getEmail());
             client.setCfpOuCnpj(obj.getCfpOuCnpj());
+            client.setTypeClient(Integer.valueOf(obj.getTypeClient()));
+            client.getAndresses().addAll(obj.getAndresses());
+            client.getOrders().addAll(obj.getOrders());
+            client.getTelephones().addAll(obj.getTelephones());
         }
         catch (RuntimeException e) {
             throw new ClientNotFoundException(utilMessageClient.getMessageErrorFindOneClient());

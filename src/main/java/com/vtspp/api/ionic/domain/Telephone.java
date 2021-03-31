@@ -3,6 +3,7 @@ package com.vtspp.api.ionic.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -12,6 +13,8 @@ public class Telephone implements Serializable {
 
     @Id
     private Integer id;
+
+    @NotEmpty(message = "Informe um número de telefone")
     private String number;
 
     @ManyToOne

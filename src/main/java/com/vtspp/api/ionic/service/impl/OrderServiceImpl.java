@@ -67,6 +67,7 @@ public class OrderServiceImpl implements OrderService {
             order.setClient(obj.getClient());
             order.setPayment(obj.getPayment());
             order.setDeliveryAddress(obj.getDeliveryAddress());
+            order.getItens().addAll(obj.getItens());
         }
         catch (RuntimeException e) {
             throw new OrderNotFoundException(utilMessageOrder.getMessageErrorFindOneOrder());
