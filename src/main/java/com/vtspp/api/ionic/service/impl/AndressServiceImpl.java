@@ -1,7 +1,10 @@
 package com.vtspp.api.ionic.service.impl;
 
 import com.vtspp.api.ionic.domain.Andress;
-import com.vtspp.api.ionic.repositories.AndressRepository;
+import com.vtspp.api.ionic.domain.City;
+import com.vtspp.api.ionic.domain.Client;
+import com.vtspp.api.ionic.domain.State;
+import com.vtspp.api.ionic.facade.FacadeRepository;
 import com.vtspp.api.ionic.service.AndressService;
 import com.vtspp.api.ionic.service.exceptions.andress.*;
 import com.vtspp.api.ionic.util.messages.exceptions.andress.UtilMessageAndress;
@@ -18,20 +21,25 @@ import static com.vtspp.api.ionic.util.Check.isNull;
 @Service
 public class AndressServiceImpl implements AndressService {
 
-    private AndressRepository andressRepository;
-
+    private FacadeRepository facadeRepository;
     private UtilMessageAndress utilMessageAndress;
 
     @Autowired
-    public AndressServiceImpl(AndressRepository andressRepository, UtilMessageAndress utilMessageAndress) {
-        this.andressRepository = andressRepository;
+    public AndressServiceImpl(FacadeRepository facadeRepository, UtilMessageAndress utilMessageAndress) {
+        this.facadeRepository = facadeRepository;
         this.utilMessageAndress = utilMessageAndress;
     }
 
     @Override
     public Andress save(Andress obj) throws AndressNotSaveException {
         try {
-            return andressRepository.save(obj);
+            State state = facadeRepository.getStateRepository().save(obj.getCity().getState());
+            City city = facadeRepository.getCityRepository().save(obj.getCity());
+            state.getCities().add(city);
+
+            obj.getCity().setState(state);
+            obj.setCity(city);
+            return facadeRepository.getAndressRepository().save(obj);
         }
         catch (RuntimeException e) {
             throw new AndressNotSaveException(utilMessageAndress.getMessageErrorSaveAndress());
@@ -41,7 +49,7 @@ public class AndressServiceImpl implements AndressService {
     @Override
     public void remove(Integer id) throws AndressRemoveException {
         try {
-            andressRepository.deleteById(id);
+            facadeRepository.getAndressRepository().deleteById(id);
         }
         catch (RuntimeException e) {
             throw new AndressRemoveException(utilMessageAndress.getMessageErrorRemoveAndress());
@@ -51,7 +59,7 @@ public class AndressServiceImpl implements AndressService {
     @Override
     public List<Andress> findAll() throws AndressFindAllException {
         try {
-            return andressRepository.findAll();
+            return facadeRepository.getAndressRepository().findAll();
         }
         catch (RuntimeException e) {
             throw new AndressFindAllException(utilMessageAndress.getMessageErrorFindAllAndress());
@@ -62,20 +70,20 @@ public class AndressServiceImpl implements AndressService {
     public void update(Andress obj) throws AndressUpdateException, AndressNotFoundException {
         Andress andress;
         try {
-            andress = andressRepository.getOne(obj.getId());
+            andress = facadeRepository.getAndressRepository().getOne(obj.getId());
             andress.setStreet(obj.getStreet());
             andress.setNumber(obj.getNumber());
             andress.setComplement(obj.getComplement());
             andress.setDistrict(obj.getDistrict());
             andress.setZipCode(obj.getZipCode());
-            andress.setClient(obj.getClient());
             andress.setCity(obj.getCity());
+            andress.getCity().setState(obj.getCity().getState());
         }
         catch (RuntimeException e) {
             throw new AndressNotFoundException(utilMessageAndress.getMessageErrorFindOneAndress());
         }
         try {
-            andressRepository.save(andress);
+            facadeRepository.getAndressRepository().saveAndFlush(andress);
         }
         catch (RuntimeException e) {
             throw new AndressUpdateException(utilMessageAndress.getMessageErrorUpdateAndress());
@@ -86,13 +94,13 @@ public class AndressServiceImpl implements AndressService {
     @Override
     public Andress findOne(Integer id) throws RuntimeException {
         if(isNull(id)) throw new IllegalArgumentException(utilMessageAndress.getMessageErrorFindOneAndress());
-        return andressRepository.getOne(id);
+        return facadeRepository.getAndressRepository().getOne(id);
     }
 
     @Override
     public Page<Andress> findPage(Integer page, Integer linePerPage, String direction, String orderBy) {
         PageRequest pageRequest = PageRequest.of(page, linePerPage, Sort.Direction.valueOf(direction), orderBy);
-        return andressRepository.findAll(pageRequest);
+        return facadeRepository.getAndressRepository().findAll(pageRequest);
     }
 
     public final UtilMessageAndress getUtilMessageAndress() {
