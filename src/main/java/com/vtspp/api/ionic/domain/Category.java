@@ -3,6 +3,8 @@ package com.vtspp.api.ionic.domain;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity(name = "tb_category")
@@ -16,17 +18,16 @@ public class Category implements Serializable {
     @NotEmpty(message = "Informe a categoria")
     private String name;
 
-    @ManyToOne
+    @OneToMany
     @JoinColumn(name = "product_id")
-    private Product product;
+    private List<Product> products = new ArrayList<>();
 
     public Category () {
     }
 
-    public Category(Integer id, String name, Product product) {
+    public Category(Integer id, String name) {
         this.id = id;
         this.name = name;
-        this.product = product;
     }
 
     public Integer getId() {
@@ -45,12 +46,8 @@ public class Category implements Serializable {
         this.name = name;
     }
 
-    public Product getProducts() {
-        return product;
-    }
-
-    public void setProducts(Product product) {
-        this.product = product;
+    public List<Product> getProducts() {
+        return products;
     }
 
     @Override
