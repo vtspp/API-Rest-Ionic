@@ -1,6 +1,8 @@
 package com.vtspp.api.ionic.service.impl;
 
 import com.vtspp.api.ionic.domain.City;
+import com.vtspp.api.ionic.domain.State;
+import com.vtspp.api.ionic.facade.FacadeRepository;
 import com.vtspp.api.ionic.repositories.CityRepository;
 import com.vtspp.api.ionic.service.CityService;
 import com.vtspp.api.ionic.service.exceptions.city.*;
@@ -18,20 +20,22 @@ import static com.vtspp.api.ionic.util.Check.isNull;
 @Service
 public class CityServiceImpl implements CityService {
 
-    private CityRepository cityRepository;
+    private FacadeRepository facadeRepository;
 
     private UtilMessageCity utilMessageCity;
 
     @Autowired
-    public CityServiceImpl(CityRepository cityRepository, UtilMessageCity utilMessageCity) {
-        this.cityRepository = cityRepository;
+    public CityServiceImpl(FacadeRepository facadeRepository, UtilMessageCity utilMessageCity) {
+        this.facadeRepository = facadeRepository;
         this.utilMessageCity = utilMessageCity;
     }
 
     @Override
     public City save(City obj) throws CityNotSaveException {
         try {
-            return cityRepository.save(obj);
+            State state = facadeRepository.getStateRepository().save(obj.getState());
+            obj.setState(state);
+            return facadeRepository.getCityRepository().save(obj);
         }
         catch (RuntimeException e) {
             throw new CityNotSaveException(utilMessageCity.getMessageErrorSaveCity());
@@ -41,7 +45,7 @@ public class CityServiceImpl implements CityService {
     @Override
     public void remove(Integer id) throws CityRemoveException {
         try {
-            cityRepository.deleteById(id);
+            facadeRepository.getCityRepository().deleteById(id);
         }
         catch (RuntimeException e) {
             throw new CityRemoveException(utilMessageCity.getMessageErrorRemoveCity());
@@ -51,7 +55,7 @@ public class CityServiceImpl implements CityService {
     @Override
     public List<City> findAll() throws CityFindAllException {
         try {
-            return cityRepository.findAll();
+            return facadeRepository.getCityRepository().findAll();
         }
         catch (RuntimeException e) {
             throw new CityFindAllException(utilMessageCity.getMessageErrorFindAllCity());
@@ -62,15 +66,19 @@ public class CityServiceImpl implements CityService {
     public void update(City obj) throws CityUpdateException, CityNotFoundException {
         City city;
         try {
-            city = cityRepository.getOne(obj.getId());
-            city.setName(obj.getName());
-            city.setState(obj.getState());
+            city = facadeRepository.getCityRepository().getOne(obj.getId());
         }
         catch (RuntimeException e) {
             throw new CityNotFoundException(utilMessageCity.getMessageErrorFindOneCity());
         }
         try {
-            cityRepository.save(city);
+            city.setName(obj.getName());
+            city.setState(obj.getState());
+            facadeRepository.getCityRepository().save(city);
+
+            State state = obj.getState();
+            state.getCities().add(city);
+            facadeRepository.getStateRepository().save(state);
         }
         catch (RuntimeException e) {
             throw new CityUpdateException(utilMessageCity.getMessageErrorUpdateCity());
@@ -81,13 +89,13 @@ public class CityServiceImpl implements CityService {
     @Override
     public City findOne(Integer id) throws RuntimeException {
         if(isNull(id)) throw new IllegalArgumentException(utilMessageCity.getMessageErrorFindOneCity());
-        return cityRepository.getOne(id);
+        return facadeRepository.getCityRepository().getOne(id);
     }
 
     @Override
     public Page<City> findPage(Integer page, Integer linePerPage, String direction, String orderBy) {
         PageRequest pageRequest = PageRequest.of(page, linePerPage, Sort.Direction.valueOf(direction), orderBy);
-        return cityRepository.findAll(pageRequest);
+        return facadeRepository.getCityRepository().findAll(pageRequest);
     }
 
     public final UtilMessageCity getUtilMessageCity() {
