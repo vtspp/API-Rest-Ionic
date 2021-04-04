@@ -2,7 +2,6 @@ package com.vtspp.api.ionic.service.impl;
 
 import com.vtspp.api.ionic.domain.Andress;
 import com.vtspp.api.ionic.domain.City;
-import com.vtspp.api.ionic.domain.Client;
 import com.vtspp.api.ionic.domain.State;
 import com.vtspp.api.ionic.facade.FacadeRepository;
 import com.vtspp.api.ionic.service.AndressService;

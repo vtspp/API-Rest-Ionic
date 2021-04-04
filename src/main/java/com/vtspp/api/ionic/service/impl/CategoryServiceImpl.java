@@ -3,7 +3,6 @@ package com.vtspp.api.ionic.service.impl;
 import com.vtspp.api.ionic.domain.Category;
 import com.vtspp.api.ionic.domain.Product;
 import com.vtspp.api.ionic.facade.FacadeRepository;
-import com.vtspp.api.ionic.repositories.CategoryRepository;
 import com.vtspp.api.ionic.service.CategoryService;
 import com.vtspp.api.ionic.service.exceptions.category.*;
 import com.vtspp.api.ionic.util.messages.exceptions.category.UtilMessageCategory;

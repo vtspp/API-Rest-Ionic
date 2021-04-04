@@ -3,7 +3,6 @@ package com.vtspp.api.ionic.service.impl;
 import com.vtspp.api.ionic.domain.City;
 import com.vtspp.api.ionic.domain.State;
 import com.vtspp.api.ionic.facade.FacadeRepository;
-import com.vtspp.api.ionic.repositories.CityRepository;
 import com.vtspp.api.ionic.service.CityService;
 import com.vtspp.api.ionic.service.exceptions.city.*;
 import com.vtspp.api.ionic.util.messages.exceptions.city.UtilMessageCity;

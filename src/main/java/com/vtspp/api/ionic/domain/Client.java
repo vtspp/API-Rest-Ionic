@@ -31,8 +31,6 @@ public class Client implements Serializable {
 
     private String cfpOuCnpj;
 
-    @JoinColumn(name = "type_client_id")
-    @NotEmpty(message = "O tipo de cliente deve ser informado")
     private Integer typeClient;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "client")
