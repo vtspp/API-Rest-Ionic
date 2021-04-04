@@ -1,6 +1,7 @@
 package com.vtspp.api.ionic.service.impl;
 
 import com.vtspp.api.ionic.domain.ItemOrder;
+import com.vtspp.api.ionic.facade.FacadeRepository;
 import com.vtspp.api.ionic.repositories.ItemOrderRepository;
 import com.vtspp.api.ionic.service.ItemOrderService;
 import com.vtspp.api.ionic.service.exceptions.item_order.*;
@@ -19,20 +20,22 @@ import static com.vtspp.api.ionic.util.Converter.toItemOrderPK;
 @Service
 public class ItemOrderServiceImpl implements ItemOrderService {
 
-    private ItemOrderRepository itemOrderRepository;
+    private FacadeRepository facadeRepository;
 
     private UtilMessageItemOrder utilMessageItemOrder;
 
     @Autowired
-    public ItemOrderServiceImpl(ItemOrderRepository itemOrderRepository, UtilMessageItemOrder utilMessageItemOrder) {
-        this.itemOrderRepository = itemOrderRepository;
+    public ItemOrderServiceImpl(FacadeRepository facadeRepository, UtilMessageItemOrder utilMessageItemOrder) {
+        this.facadeRepository = facadeRepository;
         this.utilMessageItemOrder = utilMessageItemOrder;
     }
 
     @Override
     public ItemOrder save(ItemOrder obj) throws ItemOrderNotSaveException {
         try {
-            return itemOrderRepository.save(obj);
+            facadeRepository.getProductRepository().save(obj.getProduct());
+            facadeRepository.getOrderRepository().save(obj.getId().getOrder());
+            return facadeRepository.getItemOrderRepository().save(obj);
         }
         catch (RuntimeException e) {
             throw new ItemOrderNotSaveException(utilMessageItemOrder.getMessageErrorSaveItemOrder());
@@ -42,7 +45,7 @@ public class ItemOrderServiceImpl implements ItemOrderService {
     @Override
     public void remove(Integer id) throws ItemOrderRemoveException {
         try {
-            itemOrderRepository.deleteById(toItemOrderPK(id));
+            facadeRepository.getItemOrderRepository().deleteById(toItemOrderPK(id));
         }
         catch (RuntimeException e) {
             throw new ItemOrderRemoveException(utilMessageItemOrder.getMessageErrorRemoveItemOrder());
@@ -52,7 +55,7 @@ public class ItemOrderServiceImpl implements ItemOrderService {
     @Override
     public List<ItemOrder> findAll() throws ItemOrderFindAllException {
         try {
-            return itemOrderRepository.findAll();
+            return facadeRepository.getItemOrderRepository().findAll();
         }
         catch (RuntimeException e) {
             throw new ItemOrderFindAllException(utilMessageItemOrder.getMessageErrorFindAllItemOrder());
@@ -63,7 +66,7 @@ public class ItemOrderServiceImpl implements ItemOrderService {
     public void update(ItemOrder obj) throws ItemOrderUpdateException, ItemOrderNotFoundException {
         ItemOrder itemOrder;
         try {
-            itemOrder = itemOrderRepository.getOne(obj.getId());
+            itemOrder = facadeRepository.getItemOrderRepository().getOne(obj.getId());
             itemOrder.setDiscount(obj.getDiscount());
             itemOrder.setQuantity(obj.getQuantity());
             itemOrder.setPrice(obj.getPrice());
@@ -74,7 +77,7 @@ public class ItemOrderServiceImpl implements ItemOrderService {
             throw new ItemOrderNotFoundException(utilMessageItemOrder.getMessageErrorFindOneItemOrder());
         }
         try {
-            itemOrderRepository.save(itemOrder);
+            facadeRepository.getItemOrderRepository().save(itemOrder);
         }
         catch (RuntimeException e) {
             throw new ItemOrderUpdateException(utilMessageItemOrder.getMessageErrorUpdateItemOrder());
@@ -85,13 +88,13 @@ public class ItemOrderServiceImpl implements ItemOrderService {
     @Override
     public ItemOrder findOne(Integer id) throws RuntimeException {
         if(isNull(id)) throw new IllegalArgumentException(utilMessageItemOrder.getMessageErrorFindOneItemOrder());
-        return itemOrderRepository.getOne(toItemOrderPK(id));
+        return facadeRepository.getItemOrderRepository().getOne(toItemOrderPK(id));
     }
 
     @Override
     public Page<ItemOrder> findPage(Integer page, Integer linePerPage, String direction, String orderBy) {
         PageRequest pageRequest = PageRequest.of(page, linePerPage, Sort.Direction.valueOf(direction), orderBy);
-        return itemOrderRepository.findAll(pageRequest);
+        return facadeRepository.getItemOrderRepository().findAll(pageRequest);
     }
 
     public final UtilMessageItemOrder getUtilMessageItemOrder() {
