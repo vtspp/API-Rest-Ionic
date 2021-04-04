@@ -1,9 +1,12 @@
 package com.vtspp.api.ionic.domain;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
 import javax.persistence.Entity;
 import javax.validation.constraints.NotEmpty;
 
 @Entity(name = "tb_payment_card")
+@JsonTypeName("paymentCard")
 public class PaymentCard extends Payment{
 
     @NotEmpty(message = "Informe o número de parcelas")

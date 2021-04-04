@@ -1,6 +1,7 @@
 package com.vtspp.api.ionic.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.vtspp.api.ionic.enums.StatusPayment;
 import com.vtspp.api.ionic.util.Converter;
 
@@ -10,7 +11,8 @@ import java.util.Objects;
 
 @Entity(name = "tb_payment")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Payment implements Serializable {
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@type")
+public abstract class Payment implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id

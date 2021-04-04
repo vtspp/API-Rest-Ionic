@@ -1,6 +1,7 @@
 package com.vtspp.api.ionic.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.vtspp.api.ionic.enums.StatusPayment;
 
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 
 @Entity(name = "tb_payment_with_boleto")
+@JsonTypeName("paymentWithBoleto")
 public class PaymentWithBoleto extends Payment{
 
      @JsonFormat(pattern="dd/MM/yyyy")
