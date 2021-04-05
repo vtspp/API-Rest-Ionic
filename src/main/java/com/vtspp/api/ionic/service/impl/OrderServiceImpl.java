@@ -64,16 +64,16 @@ public class OrderServiceImpl implements OrderService {
         Order order;
         try {
             order = facadeRepository.getOrderRepository().getOne(obj.getId());
-            order.setInstant(obj.getInstant());
-            order.setClient(obj.getClient());
-            order.setPayment(obj.getPayment());
-            order.setDeliveryAddress(obj.getDeliveryAddress());
-            order.getItens().addAll(obj.getItens());
         }
         catch (RuntimeException e) {
             throw new OrderNotFoundException(utilMessageOrder.getMessageErrorFindOneOrder());
         }
         try {
+            order.setInstant(obj.getInstant());
+            order.setClient(obj.getClient());
+            order.setPayment(obj.getPayment());
+            order.setDeliveryAddress(obj.getDeliveryAddress());
+            order.getItens().addAll(obj.getItens());
             facadeRepository.getOrderRepository().save(order);
         }
         catch (RuntimeException e) {
