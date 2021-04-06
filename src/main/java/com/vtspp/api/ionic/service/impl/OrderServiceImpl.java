@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 
@@ -27,15 +28,17 @@ public class OrderServiceImpl implements OrderService, TemplateMethodEmailServic
 
     private FacadeRepository facadeRepository;
     private UtilMessageOrder utilMessageOrder;
+    private MailSender mailSender;
     private Parameter parameter;
 
     private static final Logger LOG = LoggerFactory.getLogger(OrderServiceImpl.class);
 
     @Autowired
-    public OrderServiceImpl(FacadeRepository facadeRepository, UtilMessageOrder utilMessageOrder, Parameter parameter) {
+    public OrderServiceImpl(FacadeRepository facadeRepository, UtilMessageOrder utilMessageOrder, Parameter parameter, MailSender mailSender) {
         this.facadeRepository = facadeRepository;
         this.utilMessageOrder = utilMessageOrder;
         this.parameter = parameter;
+        this.mailSender = mailSender;
     }
 
     @Override
@@ -108,17 +111,18 @@ public class OrderServiceImpl implements OrderService, TemplateMethodEmailServic
     public SimpleMailMessage prepareSimpleMailMessage(Order obj) {
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         simpleMailMessage.setTo(obj.getClient().getEmail());
-        simpleMailMessage.setFrom(parameter.getValue("default.recipent"));
+        simpleMailMessage.setFrom(parameter.getValue("default.sender"));
         simpleMailMessage.setSubject("Confirmação de Pedido: " + obj.getId());
         simpleMailMessage.setSentDate(new Date(System.currentTimeMillis()));
+        simpleMailMessage.setText("Mensagem de Teste" + obj.getItens().toString());
 
         return simpleMailMessage;
     }
 
     @Override
     public void senderEmail(SimpleMailMessage message) {
-        LOG.info("Simulando envio de email");
-        LOG.info(message.toString());
+        LOG.info("Enviando email...");
+        mailSender.send(message);
         LOG.info("Email enviado");
     }
 
