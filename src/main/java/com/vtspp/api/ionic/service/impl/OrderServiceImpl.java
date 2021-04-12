@@ -110,8 +110,8 @@ public class OrderServiceImpl implements OrderService, TemplateMethodEmailServic
     @Override
     public SimpleMailMessage prepareSimpleMailMessage(Order obj) {
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-        simpleMailMessage.setTo(obj.getClient().getEmail());
-        simpleMailMessage.setFrom(parameter.getValue("default.sender"));
+        simpleMailMessage.setTo("armandaluizapinho@gmail.com");
+        simpleMailMessage.setFrom("vtsppinho@gmail.com");
         simpleMailMessage.setSubject("Confirmação de Pedido: " + obj.getId());
         simpleMailMessage.setSentDate(new Date(System.currentTimeMillis()));
         simpleMailMessage.setText("Mensagem de Teste" + obj.getItens().toString());
